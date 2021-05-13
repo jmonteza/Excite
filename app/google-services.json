@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "498200579861",
+    "project_id": "chatmatch-b8ec9",
+    "storage_bucket": "chatmatch-b8ec9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498200579861:android:cc60cc04314dbee060231c",
+        "android_client_info": {
+          "package_name": "com.example.chatmatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "498200579861-clf7kf887c29dbeps47at8ofi6quf4ck.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgqP656OT9ENuqWNmlYU6XxpycMR-9Uzs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "498200579861-clf7kf887c29dbeps47at8ofi6quf4ck.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
