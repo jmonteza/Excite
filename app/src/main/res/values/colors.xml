@@ -6,5 +6,16 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name = "primary">#F54B64</color>
+    <color name = "yellow">#FFCC4D</color>
     <color name="white">#FFFFFFFF</color>
+    <color name = "matches">#242A38</color>
+
+    <color name="card1">#d4cbe5</color>
+    <color name="card2">#ffffff</color>
+    <color name="card3">#f7c59f</color>
+    <color name="card4">#b8d7f5</color>
+    <color name="card5">#e27c6f</color>
+    <color name="card6">#c9e3db</color>
+    <color name="card7">#86d098</color>
 </resources>

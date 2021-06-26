@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:background="#F7FFFFFF"
+        android:layout_height="wrap_content"
+
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            >
+
+            <View
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:id="@+id/rectangle_2"
+                android:layout_width="match_parent"
+                android:layout_height="510.67dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/matches"
+                />
+
+            <TextView
+                android:id="@+id/mtch_lbl"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MATCHES"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/white"
+                android:textSize="34dp"
+                android:gravity="top"
+                android:layout_marginLeft="18dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="28dp"/>
+
+            <ImageView
+                android:id="@+id/tabslct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tab_select"
+                app:layout_constraintTop_toBottomOf="@id/mtch_lbl"
+                app:layout_constraintLeft_toLeftOf="@id/mtch_lbl"
+                android:layout_marginTop="43dp"
+                />
+
+            <TextView
+                android:id="@+id/chat_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="33dp"
+                android:fontFamily="@font/montserrat"
+                android:text="Online"
+                android:textColor="@color/white"
+                android:textFontWeight="700"
+                android:textSize="18sp"
+                app:layout_constraintLeft_toLeftOf="@id/tabslct"
+                app:layout_constraintTop_toBottomOf="@id/mtch_lbl" />
+
+            <TextView
+                android:id="@+id/excite_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="64dp"
+                android:layout_marginTop="33dp"
+                android:text="Excite"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textFontWeight="700"
+                app:layout_constraintLeft_toRightOf="@id/chat_lbl"
+                app:layout_constraintTop_toBottomOf="@id/mtch_lbl" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="462dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toLeftOf="@+id/mtch_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/chat_lbl"
+                android:layout_marginTop="20dp"
+                tools:layout_editor_absoluteY="206dp"
+                android:layout_marginLeft="16dp">
+
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+    </ScrollView>
+
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="70dp"
+        android:background="@color/white"
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        app:itemRippleColor="@color/navselected"
+        app:menu="@menu/menu" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
