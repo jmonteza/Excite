@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Fullscreen">
         <activity android:name=".Messages.messageActivity"></activity>
-        <activity android:name=".Matches.matches">
+        <activity android:name=".AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
