@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/notify_bell"
+        android:icon="@drawable/notification_bell"
+        android:title=""
+        android:contentDescription="@string/notification_bell"
+        app:showAsAction="ifRoom" />
+
+<!--    <item-->
+<!--        android:id="@+id/notify_item"-->
+<!--        android:icon="@drawable/notification_item"-->
+<!--        android:title=""-->
+<!--        android:contentDescription="@string/notification_item"-->
+<!--        app:showAsAction="ifRoom" />-->
+
+</menu>

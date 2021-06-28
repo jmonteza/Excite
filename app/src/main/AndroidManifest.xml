@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Fullscreen">
-        <activity android:name=".Messages.messageActivity"></activity>
-        <activity android:name=".Matches.matches">
+        <activity android:name=".Discover.discoverActivity" />
+        <activity android:name=".Messages.messageActivity" />
+        <activity android:name=".Matches.matches"/>
+        <activity android:name=".splashscreen.splash_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_bell">notify_bell</string>
+    <string name="notification_item">notify_item</string>
+    <string name="Discover">discover</string>
+</resources>
