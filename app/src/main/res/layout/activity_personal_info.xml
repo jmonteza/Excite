@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="40dp">
+
+    <EditText
+        android:id="@+id/fname_signup_editText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/fname"
+        android:background="@color/input"
+        android:padding="20dp"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:inputType="textPersonName|textCapWords"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/lname_signup_editText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lname"
+        android:background="@color/input"
+        android:padding="20dp"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:inputType="textPersonName|textCapWords"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/age_signup_editText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/age"
+        android:background="@color/input"
+        android:padding="20dp"
+        android:inputType="number"
+        android:layout_marginTop="40dp"
+        android:digits="1234567890"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/zodiac_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"/>
+
+</LinearLayout>

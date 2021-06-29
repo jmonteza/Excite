@@ -32,7 +32,7 @@ public class AuthActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_personal_info);
         mAuth = FirebaseAuth.getInstance();
         // currentUser = mAuth.getCurrentUser();
         //
