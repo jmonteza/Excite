@@ -16,6 +16,7 @@
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:inputType="textPersonName|textCapWords"
         android:layout_marginTop="40dp"
+        android:maxLength="30"
         android:textStyle="bold"/>
 
     <EditText
@@ -28,6 +29,7 @@
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:inputType="textPersonName|textCapWords"
         android:layout_marginTop="40dp"
+        android:maxLength="30"
         android:textStyle="bold"/>
 
     <EditText
@@ -40,6 +42,7 @@
         android:inputType="number"
         android:layout_marginTop="40dp"
         android:digits="1234567890"
+        android:maxLength="2"
         android:textStyle="bold"/>
 
     <Spinner
