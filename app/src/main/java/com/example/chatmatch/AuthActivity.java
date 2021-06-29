@@ -70,6 +70,8 @@ public class AuthActivity extends AppCompatActivity {
                 });
     }
 
+
+
     private void signInUser(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -78,7 +80,7 @@ public class AuthActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             currentUser = mAuth.getCurrentUser();
-                            user_id_tv.setText(currentUser.getEmail());
+                            user_id_tv.setText(String.valueOf(currentUser.isEmailVerified()));
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(AuthActivity.this, "Authentication failed.",
@@ -92,13 +94,27 @@ public class AuthActivity extends AppCompatActivity {
     public void signUp(View v){
         String email = email_signup_et.getText().toString();
         String password = password_signup_et.getText().toString();
+
+        if (email.length() <= 0 || password.length() <= 0){
+            return;
+        }
+
         createAccount(email, password);
     }
 
     public void logIn(View v){
         String email = email_login_et.getText().toString();
         String password = password_login_et.getText().toString();
+
+        if (email.length() <= 0 || password.length() <= 0){
+            return;
+        }
+
         signInUser(email, password);
+    }
+
+    public void signUpRedirect(View v){
+        setContentView(R.layout.activity_login);
     }
 
 }
