@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="40dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wave"
+        android:textSize="40dp"
+        android:textColor="@color/primary"
+        android:textStyle="bold"
+        android:textAlignment="center">
+
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+
+
+    <EditText
+        android:id="@+id/fname_signup_editText"
+        android:layout_width="0dp"
+        android:layout_weight="0.70"
+        android:layout_height="wrap_content"
+        android:hint="@string/fname"
+        android:background="@color/input"
+        android:padding="20dp"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:inputType="textPersonName|textCapWords"
+        android:layout_marginTop="40dp"
+        android:maxLength="30"
+        android:textStyle="bold"
+        android:layout_marginEnd="10dp"/>
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/lname_signup_editText"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="@string/lname"-->
+<!--            android:background="@color/input"-->
+<!--            android:padding="20dp"-->
+<!--            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"-->
+<!--            android:inputType="textPersonName|textCapWords"-->
+<!--            android:layout_marginTop="40dp"-->
+<!--            android:maxLength="30"-->
+<!--            android:textStyle="bold"/>-->
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+
+    <EditText
+        android:id="@+id/age_signup_editText"
+        android:layout_width="0dp"
+        android:layout_weight="0.30"
+        android:layout_height="wrap_content"
+        android:hint="@string/age"
+        android:background="@color/input"
+        android:padding="20dp"
+        android:inputType="number"
+        android:layout_marginTop="40dp"
+        android:digits="1234567890"
+        android:maxLength="2"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/foot_signup_editText"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="ft"
+            android:background="@color/input"
+            android:padding="20dp"
+            android:inputType="number"
+            android:layout_marginTop="40dp"
+            android:digits="123456789"
+            android:maxLength="1"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"/>
+
+        <EditText
+            android:id="@+id/inches_signup_editText"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="in"
+            android:background="@color/input"
+            android:padding="20dp"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="40dp"
+            android:digits="1234567890."
+            android:maxLength="4"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/major_signup_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Major"
+        android:background="@color/input"
+        android:padding="20dp"
+        android:inputType="text"
+        android:layout_marginTop="40dp"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:maxLength="20"
+        android:textStyle="bold"/>
+
+
+    <Spinner
+        android:id="@+id/zodiac_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:spinnerMode="dialog"
+        android:prompt="@string/zodiac"/>
+
+    <Spinner
+        android:id="@+id/grad_year_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:spinnerMode="dialog"
+        android:prompt="@string/grad_year"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp">
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Male">
+        </RadioButton>
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Female">
+        </RadioButton>
+
+
+
+
+    </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/primary"/>
+
+</LinearLayout>

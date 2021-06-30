@@ -9,7 +9,6 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chatmatch.AuthActivity;
-import com.example.chatmatch.Matches.matches;
 import com.example.chatmatch.R;
 
 import static android.view.View.SYSTEM_UI_FLAG_FULLSCREEN;

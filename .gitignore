@@ -50,3 +50,6 @@ build/
 java/build/**
 
 .gradle/*
+
+
+firebase
