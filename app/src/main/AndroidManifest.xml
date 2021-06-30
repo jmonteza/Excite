@@ -13,6 +13,7 @@
         <activity android:name=".Messages.messageActivity" />
         <activity android:name=".Matches.matches"/>
         <activity android:name=".AuthActivity"/>
+        <activity android:name=".OnboardingActivity"/>
         <activity android:name=".splashscreen.splash_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

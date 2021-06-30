@@ -5,8 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chatmatch.AuthActivity;
-import com.example.chatmatch.Matches.matches;
+import com.example.chatmatch.OnboardingActivity;
 import com.example.chatmatch.R;
 
 public class splash_screen extends AppCompatActivity {
@@ -31,7 +30,7 @@ public class splash_screen extends AppCompatActivity {
                     e.printStackTrace();
                 } finally {
                     //launch new activity / page after spash screen
-                    Intent intent = new Intent(splash_screen.this, AuthActivity.class);
+                    Intent intent = new Intent(splash_screen.this, OnboardingActivity.class);
                     startActivity(intent);
                     finish();
                 }
