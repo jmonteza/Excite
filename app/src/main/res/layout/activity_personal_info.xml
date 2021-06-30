@@ -6,9 +6,29 @@
     android:gravity="center"
     android:padding="40dp">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wave"
+        android:textSize="40dp"
+        android:textColor="@color/primary"
+        android:textStyle="bold"
+        android:textAlignment="center">
+
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+
+
     <EditText
         android:id="@+id/fname_signup_editText"
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
+        android:layout_weight="0.70"
         android:layout_height="wrap_content"
         android:hint="@string/fname"
         android:background="@color/input"
@@ -17,7 +37,8 @@
         android:inputType="textPersonName|textCapWords"
         android:layout_marginTop="40dp"
         android:maxLength="30"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginEnd="10dp"/>
 
 <!--    <com.google.android.material.textfield.TextInputLayout-->
 <!--        android:layout_width="match_parent"-->
@@ -41,7 +62,8 @@
 
     <EditText
         android:id="@+id/age_signup_editText"
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
+        android:layout_weight="0.30"
         android:layout_height="wrap_content"
         android:hint="@string/age"
         android:background="@color/input"
@@ -50,7 +72,12 @@
         android:layout_marginTop="40dp"
         android:digits="1234567890"
         android:maxLength="2"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"/>
+
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -89,8 +116,24 @@
 
 
 
+
+
+
     </LinearLayout>
 
+
+    <EditText
+        android:id="@+id/major_signup_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Major"
+        android:background="@color/input"
+        android:padding="20dp"
+        android:inputType="text"
+        android:layout_marginTop="40dp"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:maxLength="20"
+        android:textStyle="bold"/>
 
 
     <Spinner
@@ -100,6 +143,14 @@
         android:layout_marginTop="40dp"
         android:spinnerMode="dialog"
         android:prompt="@string/zodiac"/>
+
+    <Spinner
+        android:id="@+id/grad_year_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:spinnerMode="dialog"
+        android:prompt="@string/grad_year"/>
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -124,6 +175,15 @@
         </RadioButton>
 
 
+
+
     </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/primary"/>
 
 </LinearLayout>

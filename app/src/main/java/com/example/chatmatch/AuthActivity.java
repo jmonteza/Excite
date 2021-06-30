@@ -1,5 +1,6 @@
 package com.example.chatmatch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +33,7 @@ public class AuthActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal_info);
+        setContentView(R.layout.activity_signup);
         mAuth = FirebaseAuth.getInstance();
         // currentUser = mAuth.getCurrentUser();
         //
@@ -100,6 +101,13 @@ public class AuthActivity extends AppCompatActivity {
         }
 
         createAccount(email, password);
+
+        if (currentUser != null) {
+            Intent intent = new Intent(this, OnboardingActivity.class);
+            startActivity(intent);
+        }
+
+
     }
 
     public void logIn(View v){

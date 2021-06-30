@@ -13,17 +13,24 @@ public class OnboardingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_info);
 
-        Spinner spinner = (Spinner) findViewById(R.id.zodiac_spinner);
+        Spinner zodiac_spinner = (Spinner) findViewById(R.id.zodiac_spinner);
+        Spinner grad_year_spinner = (Spinner) findViewById(R.id.grad_year_spinner);
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        // Create an ArrayAdapter using the string array and a default zodiac_spinner layout
+        ArrayAdapter<CharSequence> zodiac_adapter = ArrayAdapter.createFromResource(this,
                 R.array.zodiac_array, android.R.layout.simple_spinner_item);
 
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> grad_year_adapter = ArrayAdapter.createFromResource(this,
+                R.array.grad_year_array, android.R.layout.simple_spinner_item);
 
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
+
+        // Specify the layout to use when the list of choices appears
+        zodiac_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        grad_year_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Apply the zodiac_adapter to the zodiac_spinner
+        zodiac_spinner.setAdapter(zodiac_adapter);
+        grad_year_spinner.setAdapter(grad_year_adapter);
 
     }
 }
