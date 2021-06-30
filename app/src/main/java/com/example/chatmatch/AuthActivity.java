@@ -50,8 +50,8 @@ public class AuthActivity extends AppCompatActivity {
         password_login_et = findViewById(R.id.password_login_editText);
         user_id_tv = findViewById(R.id.user_id_textView);
 
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d("User", currentUser.getEmail());
+//        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+//        Log.d("User", currentUser.getEmail());
 
 
     }

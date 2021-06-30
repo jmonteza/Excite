@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 
+import com.example.chatmatch.Discover.discover;
 import com.example.chatmatch.Matches.matches;
 import com.example.chatmatch.Messages.messageActivity;
 import com.example.chatmatch.R;
@@ -49,6 +50,11 @@ public class MenuController implements NavigationView.OnNavigationItemSelectedLi
                         return true;
                     case R.id.messaging:
                         intent = new Intent(context, messageActivity.class);
+                        context.startActivity(intent);
+                        ((Activity)context).finish();
+                        return true;
+                    case R.id.connect:
+                        intent = new Intent(context, discover.class);
                         context.startActivity(intent);
                         ((Activity)context).finish();
                         return true;

@@ -81,7 +81,8 @@
         android:padding="0dp"
         android:textColor="@color/white"
         android:backgroundTint="@color/matches"
-        android:textSize="18sp"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat"
         app:layout_constraintLeft_toLeftOf="@id/search_txt"
         app:layout_constraintTop_toBottomOf="@id/search_txt" />
 
@@ -98,7 +99,8 @@
         android:onClick="onClick"
         android:backgroundTint="@color/matches"
         android:clickable="true"
-        android:textSize="18sp"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat"
         app:layout_constraintLeft_toRightOf="@id/chat_lbl"
         app:layout_constraintTop_toBottomOf="@id/search_txt" />
 
@@ -112,7 +114,8 @@
         android:text="Rating"
         android:textColor="@color/white"
         android:backgroundTint="@color/matches"
-        android:textSize="18sp"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat"
         app:layout_constraintLeft_toRightOf="@id/dropInlbl"
         app:layout_constraintTop_toBottomOf="@id/search_txt" />
 
