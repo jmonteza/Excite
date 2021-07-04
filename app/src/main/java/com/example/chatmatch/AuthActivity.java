@@ -2,7 +2,6 @@ package com.example.chatmatch;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -64,6 +63,10 @@ public class AuthActivity extends AppCompatActivity {
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             currentUser = mAuth.getCurrentUser();
+                            if (currentUser != null) {
+                                Intent intent = new Intent(AuthActivity.this, OnboardingActivity.class);
+                                startActivity(intent);
+                            }
                         } else {
                             Toast.makeText(AuthActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
                         }
@@ -101,13 +104,6 @@ public class AuthActivity extends AppCompatActivity {
         }
 
         createAccount(email, password);
-
-        if (currentUser != null) {
-            Intent intent = new Intent(this, OnboardingActivity.class);
-            startActivity(intent);
-        }
-
-
     }
 
     public void logIn(View v){

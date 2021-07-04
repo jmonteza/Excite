@@ -5,16 +5,15 @@
         <item>&#9801; Taurus</item>
         <item>&#9802; Gemini</item>
         <item>&#9803; Cancer</item>
-        <item>Leo</item>
-        <item>Virgo</item>
-        <item>Libra</item>
-        <item>Scorpio</item>
-        <item>Sagittarius</item>
-        <item>Capricorn</item>
-        <item>Aquarius</item>
-        <item>Pisces</item>
+        <item>&#9804; Leo</item>
+        <item>&#9805; Virgo</item>
+        <item>&#9806; Libra</item>
+        <item>&#9807; Scorpio</item>
+        <item>&#9808; Sagittarius</item>
+        <item>&#9809; Capricorn</item>
+        <item>&#9810; Aquarius</item>
+        <item>&#9811; Pisces</item>
     </string-array>
-
 
     <string-array name="grad_year_array">
         <item>2021</item>
