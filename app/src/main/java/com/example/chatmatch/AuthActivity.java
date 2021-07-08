@@ -29,6 +29,7 @@ public class AuthActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
 
 
+
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,6 +120,11 @@ public class AuthActivity extends AppCompatActivity {
 
     public void signUpRedirect(View v){
         setContentView(R.layout.activity_login);
+    }
+
+    public void profilePicture(View v){
+        Intent intent = new Intent(AuthActivity.this, ProfilePhotoActivity.class);
+        startActivity(intent);
     }
 
 }
