@@ -16,9 +16,16 @@
     <color name="card3">#f7c59f</color>
     <color name="card4">#b8d7f5</color>
     <color name="card5">#e27c6f</color>
+    <color name = "customColor">#F54B64</color>
+    <color name = "rippleColor">#42F54B64</color>
     <color name="card6">#c9e3db</color>
     <color name="card7">#86d098</color>
 
-    <color name="input">#f3f3f3</color>
+    <color name="input">#f1f1f1</color>
+    <color name = "cstmstroke">#F3F3F3</color>
 
+    <color name = "phnverify">#c4c4c4</color>
+    <color name = "custmEdit">#E3C4C4C4</color>
+    <color name = "editvalue">#AB4E596F</color>
+    <color name = "occupation">#8FFFFFFF</color>
 </resources>

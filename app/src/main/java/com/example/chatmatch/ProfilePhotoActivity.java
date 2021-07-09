@@ -21,6 +21,7 @@ public class ProfilePhotoActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_picture_signup);
+        profile_photo_iv = findViewById(R.id.profile_picture_imageView);
         // profile_photo_iv = findViewById(R.id.profile_picture_imageView);
     }
 
@@ -37,9 +38,10 @@ public class ProfilePhotoActivity extends AppCompatActivity {
 
     }
 
-    // public void uploadPhotoToFirebaseStorage(View v){
-    //
-    // }
+     public void uploadPhotoToFirebaseStorage(View v){
+
+     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -50,7 +52,8 @@ public class ProfilePhotoActivity extends AppCompatActivity {
                Uri selectedImageURI = data.getData();
                File myFile = new File(String.valueOf(selectedImageURI));
                String selectedImagePath = myFile.getPath();
-                Glide.with(this).load(selectedImagePath).into(profile_photo_iv);
+
+                Glide.with(this).load(data.getData()).into((ImageView)findViewById(R.id.profile_picture_imageView));
             }
 
         }

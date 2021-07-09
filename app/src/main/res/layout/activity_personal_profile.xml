@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <View
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/rectangle_2"
+        android:layout_width="match_parent"
+        android:layout_height="355.5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/personal_prof_blob"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="41dp"
+        android:layout_marginLeft="31dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/montserrat"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:id="@+id/userName"
+        android:text="ALEXIS, 23"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/userName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="31dp"
+        android:textColor="@color/occupation"
+        android:fontFamily="@font/montserrat"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:id="@+id/userOccupation"
+        android:text="Professional Model"/>
+
+    <ProgressBar
+        android:id="@+id/simpleProgressBar"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        app:layout_constraintTop_toBottomOf="@id/userOccupation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:progressTint="@color/customColor"
+        android:progress="67"
+
+        android:layout_marginLeft="31dp"
+        />
+
+    <View
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/userImg"
+
+        android:layout_width="81dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/profile_image"
+        />
+
+
+
+<!--    <com.google.android.material.card.MaterialCardView-->
+<!--        android:layout_width="384dp"-->
+<!--        android:layout_height="355.5dp"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

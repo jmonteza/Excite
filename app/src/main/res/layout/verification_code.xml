@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageView
+        android:id="@+id/exiteLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:src="@drawable/excite_logo"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/bckarrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:layout_marginLeft="28dp"
+        android:background="@drawable/back_arrow"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone Verification"
+        app:layout_constraintTop_toBottomOf="@id/exiteLogo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="40dp"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:id="@+id/phnVerificationtxt"/>
+
+    <!-- Spans needed for text customization    -->
+    <TextView
+        android:layout_width="296dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/phnVerificationtxt"
+        android:text = "@string/phone_code"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="13.5sp"
+        android:id="@+id/phnvalue"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="31dp"/>
+
+
+    <EditText
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/phnvalue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="34dp"
+        android:layout_marginTop="55dp"
+        android:backgroundTint="@color/black"
+        android:id="@+id/phn_val1"/>
+
+    <EditText
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/phnvalue"
+        app:layout_constraintLeft_toRightOf="@id/phn_val1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="55dp"
+        android:backgroundTint="@color/black"
+        android:id="@+id/phn_val2"/>
+
+    <EditText
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/phnvalue"
+        app:layout_constraintLeft_toRightOf="@id/phn_val2"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="55dp"
+        android:backgroundTint="@color/black"
+        android:id="@+id/phn_val3"/>
+
+    <EditText
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/phnvalue"
+        app:layout_constraintLeft_toRightOf="@id/phn_val3"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="55dp"
+        android:backgroundTint="@color/black"
+        android:id="@+id/phn_val4"/>
+
+    <TextView
+        android:layout_width="296dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/phn_val4"
+        android:text = "@string/code_vals"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="13.5sp"
+        android:id="@+id/codeValues"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="31dp"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="330dp"
+        android:layout_height="67dp"
+        app:layout_constraintTop_toBottomOf="@id/codeValues"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="@color/customColor"
+        app:cornerRadius="9dp"
+        android:text="Next"
+        app:rippleColor="@color/rippleColor"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="18sp"/>
+
+
+
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

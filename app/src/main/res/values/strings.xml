@@ -13,4 +13,7 @@
     <string name="zodiac">Select your zodiac sign</string>
     <string name="grad_year">Select your graduation year</string>
     <string name="wave">Welcome &#128075;</string>
+    <string name="phone_verify_txt">Tap Continue to get an SMS confirmation Code to help you use Excite</string>
+    <string name="phone_code">Enter the 4 digit code sent to your Phone Number</string>
+    <string name="code_vals">Didn’t Receive any Code?<br/> Resend Code </string>
 </resources>

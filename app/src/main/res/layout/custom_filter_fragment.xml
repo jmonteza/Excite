@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cancelfilter"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/cancel_btn"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="34dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="110dp"
+        android:layout_height="53dp"
+        android:id="@+id/filt_btn"
+        android:layout_marginTop="26dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/cancel_btn"
+        android:backgroundTint="@color/customColor"
+        android:text="Filter"
+        android:textSize="12sp"
+        android:fontFamily="@font/roboto"
+        android:layout_marginLeft="91dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="110dp"
+        android:layout_height="53dp"
+        android:id="@+id/cancl_btn"
+        android:textSize="12sp"
+        android:layout_marginTop="26dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/filt_btn"
+        android:backgroundTint="@color/customColor"
+        android:fontFamily="@font/roboto"
+        android:text="Reset"
+        android:layout_marginLeft="12dp"
+       />
+
+    <View
+        android:id="@+id/location_contain"
+        android:layout_width="337dp"
+        android:layout_height="63dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="31dp"
+        android:background="@drawable/custom_filters_tab"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cancl_btn" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,8 +27,8 @@ public class splash_screen extends AppCompatActivity {
             public void run() {
                 try{
                     synchronized (this){
-                        //wait for 5 seconds before proceeding
-                        wait(5000);
+                        //wait for 2 seconds before proceeding
+                        wait(2000);
                     }
                 } catch(InterruptedException e){
                     e.printStackTrace();
