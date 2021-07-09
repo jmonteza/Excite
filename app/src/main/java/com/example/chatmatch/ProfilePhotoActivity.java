@@ -64,7 +64,7 @@ public class ProfilePhotoActivity extends AppCompatActivity {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             StorageReference reference = storage.getReference().child("images").child("profile")
-                    .child(uid + "jpeg");
+                    .child(uid + ".jpeg");
 
             reference.putBytes(baos.toByteArray()).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
