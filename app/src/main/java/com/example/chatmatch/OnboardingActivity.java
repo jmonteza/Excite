@@ -19,13 +19,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
 
-import static android.widget.Toast.makeText;
-
-public class OnboardingActivity extends AppCompatActivity {
+public class OnboardingActivity extends AppCompatActivity implements FirebaseAuth.AuthStateListener {
     private EditText fname_et;
     private EditText age_et;
     private EditText foot_et;
@@ -74,13 +73,13 @@ public class OnboardingActivity extends AppCompatActivity {
         grad_year_sp.setAdapter(grad_year_adapter);
 
 
-        gender_rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                gender_rb = (RadioButton) findViewById(checkedId);
-                makeText(getBaseContext(), gender_rb.getText(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        // gender_rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        //     @Override
+        //     public void onCheckedChanged(RadioGroup group, int checkedId) {
+        //         gender_rb = (RadioButton) findViewById(checkedId);
+        //         makeText(getBaseContext(), gender_rb.getText(), Toast.LENGTH_SHORT).show();
+        //     }
+        // });
 
     }
 
@@ -95,7 +94,7 @@ public class OnboardingActivity extends AppCompatActivity {
         String gender = gender_rb.getText().toString();
         User user = new User(first_name, age, foot, inch, major, zodiac, grad_year, gender);
 
-
+        setUserDisplayName(first_name);
 
         db.collection("users").document(currentUser.getUid()).set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -113,4 +112,56 @@ public class OnboardingActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private void setUserDisplayName(String name){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name)
+                .build();
+
+
+        if (user != null) {
+            user.updateProfile(request).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(OnboardingActivity.this, "Update successful", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull @NotNull Exception e) {
+                    Toast.makeText(OnboardingActivity.this, "Update failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+    }
+
+
+    @Override
+    public void onAuthStateChanged(@NonNull @NotNull FirebaseAuth firebaseAuth) {
+        if (firebaseAuth.getCurrentUser() == null){
+            goToAuthActivity();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseAuth.getInstance().addAuthStateListener(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseAuth.getInstance().removeAuthStateListener(this);
+    }
+
+
+    private void goToAuthActivity(){
+        Intent intent = new Intent(this, AuthActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }

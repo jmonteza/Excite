@@ -17,6 +17,7 @@ public class EmailVerification extends AppCompatActivity {
     private FirebaseUser currentUser;
     private TextView verified_user_status;
     private TextView current_user_status;
+    private TextView current_user_email;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -26,12 +27,18 @@ public class EmailVerification extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
         verified_user_status = findViewById(R.id.verified_status);
         current_user_status = findViewById(R.id.current_user_status);
+        current_user_email = findViewById(R.id.current_user_email);
+
+        verified_user_status.setText(currentUser.getUid());
+        current_user_status.setText(String.valueOf(currentUser.isEmailVerified()));
+        current_user_email.setText(currentUser.getEmail());
     }
 
     public void verified(View v){
         currentUser.reload();
         verified_user_status.setText(currentUser.getUid());
         current_user_status.setText(String.valueOf(currentUser.isEmailVerified()));
+        current_user_email.setText(currentUser.getEmail());
         if (currentUser != null && currentUser.isEmailVerified()){
             Intent intent = new Intent(this, OnboardingActivity.class);
             startActivity(intent);

@@ -23,6 +23,8 @@ public class AuthActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText email_signup_et;
     private EditText password_signup_et;
+    private EditText verify_password_signup_et;
+
     private EditText email_login_et;
     private EditText password_login_et;
     private TextView user_id_tv;
@@ -47,6 +49,7 @@ public class AuthActivity extends AppCompatActivity {
 
         email_signup_et = findViewById(R.id.email_signup_editText);
         password_signup_et = findViewById(R.id.password_signup_editText);
+        verify_password_signup_et = findViewById(R.id.verify_password_signup_editText);
 
         email_login_et = findViewById(R.id.email_login_editText);
         password_login_et = findViewById(R.id.password_login_editText);
@@ -100,8 +103,16 @@ public class AuthActivity extends AppCompatActivity {
     public void signUp(View v){
         String email = email_signup_et.getText().toString();
         String password = password_signup_et.getText().toString();
+        String verify_password = verify_password_signup_et.getText().toString();
 
-        if (email.length() <= 0 || password.length() <= 0){
+        if (email.length() <= 0 || password.length() <= 0 || verify_password.length() <= 0){
+            return;
+        }
+
+        if (!password.equals(verify_password)){
+            Toast.makeText(this, "Your passwords do not match", Toast.LENGTH_LONG).show();
+            password_signup_et.getText().clear();
+            verify_password_signup_et.getText().clear();
             return;
         }
 
