@@ -5,10 +5,10 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chatmatch.ProfilePhotoActivity;
+import com.example.chatmatch.AuthActivity;
 import com.example.chatmatch.R;
 
-public class splash_screen extends AppCompatActivity {
+public class SplashScreen extends AppCompatActivity {
 
     
     Thread timer;
@@ -18,23 +18,19 @@ public class splash_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-
-
-
-
         timer = new Thread(){
             @Override
             public void run() {
                 try{
                     synchronized (this){
                         //wait for 2 seconds before proceeding
-                        wait(2000);
+                        wait(1000);
                     }
                 } catch(InterruptedException e){
                     e.printStackTrace();
                 } finally {
-                    //launch new activity / page after spash screen
-                    Intent intent = new Intent(splash_screen.this, ProfilePhotoActivity.class);
+                    //launch new activity / page after splash screen
+                    Intent intent = new Intent(SplashScreen.this, AuthActivity.class);
                     startActivity(intent);
                     finish();
                 }

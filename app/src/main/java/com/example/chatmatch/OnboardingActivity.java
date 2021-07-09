@@ -1,6 +1,8 @@
 package com.example.chatmatch;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -9,12 +11,17 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.jetbrains.annotations.NotNull;
 
 import static android.widget.Toast.makeText;
 
@@ -88,6 +95,22 @@ public class OnboardingActivity extends AppCompatActivity {
         String gender = gender_rb.getText().toString();
         User user = new User(first_name, age, foot, inch, major, zodiac, grad_year, gender);
 
-        db.collection("users").document(currentUser.getUid()).set(user);
+
+
+        db.collection("users").document(currentUser.getUid()).set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG,"DocumentSnapshot successfully written");
+                        Intent intent = new Intent(OnboardingActivity.this, ProfilePhotoActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
     }
 }

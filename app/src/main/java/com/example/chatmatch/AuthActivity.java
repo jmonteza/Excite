@@ -35,6 +35,7 @@ public class AuthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         mAuth = FirebaseAuth.getInstance();
+
         // currentUser = mAuth.getCurrentUser();
         //
         // if (currentUser != null){
@@ -49,7 +50,7 @@ public class AuthActivity extends AppCompatActivity {
 
         email_login_et = findViewById(R.id.email_login_editText);
         password_login_et = findViewById(R.id.password_login_editText);
-        user_id_tv = findViewById(R.id.user_id_textView);
+        // user_id_tv = findViewById(R.id.user_id_textView);
 
 //        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 //        Log.d("User", currentUser.getEmail());
@@ -65,7 +66,7 @@ public class AuthActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             currentUser = mAuth.getCurrentUser();
                             if (currentUser != null) {
-                                Intent intent = new Intent(AuthActivity.this, OnboardingActivity.class);
+                                Intent intent = new Intent(AuthActivity.this, EmailVerification.class);
                                 startActivity(intent);
                             }
                         } else {

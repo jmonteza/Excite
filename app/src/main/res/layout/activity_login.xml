@@ -46,15 +46,15 @@
             android:padding="20dp"
             android:textColor="@color/primary"/>
 
-        <TextView
-            android:id="@+id/user_id_textView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="User ID"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:padding="20dp"
-            android:textColor="@color/primary"/>
+<!--        <TextView-->
+<!--            android:id="@+id/user_id_textView"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="User ID"-->
+<!--            android:textStyle="bold"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="20dp"-->
+<!--            android:textColor="@color/primary"/>-->
 
         <Button
             android:id="@+id/log_in_btn"
@@ -66,16 +66,16 @@
             android:onClick="logIn"
             android:text="@string/login"/>
 
-        <Button
-            android:id="@+id/sign_up_redirect_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:onClick="signUpRedirect"
-            android:padding="20dp"
-            android:text="@string/signup"
-            android:textColor="@color/primary"
-            android:textStyle="bold" />
+<!--        <Button-->
+<!--            android:id="@+id/sign_up_redirect_btn"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:backgroundTint="@color/white"-->
+<!--            android:onClick="signUpRedirect"-->
+<!--            android:padding="20dp"-->
+<!--            android:text="@string/signup"-->
+<!--            android:textColor="@color/primary"-->
+<!--            android:textStyle="bold" />-->
 
 
     </LinearLayout>

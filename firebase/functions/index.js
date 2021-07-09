@@ -8,7 +8,7 @@ const { firebaseConfig } = require("firebase-functions");
 admin.initializeApp();
 
 const gmailEmail = "techiebuddy20@gmail.com"
-const gmailPassword = "***"
+const gmailPassword = "9vH!CA5!nr%kXSHynfBS"
 const mailTransport = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -30,15 +30,15 @@ const actionCodeSettings = {
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 
 
-exports.userSignedUp = functions.auth.user().onCreate((user) => {
-    // Email of the user
-    const email = user.email;
-    const displayName = user.displayName;
+// exports.userSignedUp = functions.auth.user().onCreate((user) => {
+//     // Email of the user
+//     const email = user.email;
+//     const displayName = user.displayName;
 
-    // Send a welcome email
-    return sendWelcomeEmail(email, displayName);
+//     // Send a welcome email
+//     return sendWelcomeEmail(email, displayName);
 
-});
+// });
 
 exports.disableUser = functions.auth.user().onCreate((user) => {
     // Email of the user
@@ -93,11 +93,22 @@ async function sendWelcomeEmail(email, displayName) {
 }
 
 async function sendVerificationEmail(email, displayName, link) {
+
+    const htmlMessage = `Hello ${displayName || ''}! <br> <br>
+    Please verify your account using this <a href='${link}'>link</a> <br> <br> 
+    If the link is not working, copy and paste the link below: <br> 
+    <a href='${link}'>${link}</a> <br>
+    We hope you'll enjoy our service. <br> <br>
+    Regards, <br>
+    Excite <br>
+    `
+
+
     const mailOptions = {
         from: 'Excite <techiebuddy20@gmail.com>',
         to: email,
-        subject: "Verify your Excite Account",
-        html: `"Hey ${displayName || ''}! Please verify your account using this link: <a href='${link}'>Verification Link</a>"`
+        subject: "Welcome to Excite! Please verify your account.",
+        html: htmlMessage
     };
 
     await mailTransport.sendMail(mailOptions);

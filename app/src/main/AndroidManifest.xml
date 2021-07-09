@@ -18,20 +18,11 @@
         <activity android:name=".AuthActivity"/>
         <activity android:name=".OnboardingActivity"/>
         <activity android:name=".ProfilePhotoActivity"/>
-        <activity android:name=".splashscreen.splash_screen" >
+        <activity android:name=".UserProfile"/>
+
+        <activity android:name=".splashscreen.SplashScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-
-
-
-
-
-
-
-
-
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

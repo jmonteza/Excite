@@ -1,5 +1,9 @@
 package com.example.chatmatch;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
+import java.util.Date;
+
 public class User {
     private String first_name;
     private int age;
@@ -10,6 +14,17 @@ public class User {
     private int grad_year;
     private String gender;
 
+    @ServerTimestamp
+    private Date timestamp;
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public User(String first_name, int age, float foot, float inch, String major, String zodiac, int grad_year, String gender) {
         this.first_name = first_name;
         this.age = age;
@@ -19,6 +34,7 @@ public class User {
         this.zodiac = zodiac;
         this.grad_year = grad_year;
         this.gender = gender;
+        this.timestamp = null;
     }
 
     public String getFirst_name() {
