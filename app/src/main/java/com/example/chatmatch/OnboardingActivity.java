@@ -73,13 +73,12 @@ public class OnboardingActivity extends AppCompatActivity implements FirebaseAut
         grad_year_sp.setAdapter(grad_year_adapter);
 
 
-        // gender_rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-        //     @Override
-        //     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        //         gender_rb = (RadioButton) findViewById(checkedId);
-        //         makeText(getBaseContext(), gender_rb.getText(), Toast.LENGTH_SHORT).show();
-        //     }
-        // });
+        gender_rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                gender_rb = (RadioButton) findViewById(checkedId);
+            }
+        });
 
     }
 

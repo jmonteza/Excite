@@ -134,9 +134,4 @@ public class AuthActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
-    public void profilePicture(View v){
-        Intent intent = new Intent(AuthActivity.this, ProfilePhotoActivity.class);
-        startActivity(intent);
-    }
-
 }
