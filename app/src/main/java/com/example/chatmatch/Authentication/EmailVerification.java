@@ -35,16 +35,24 @@ public class EmailVerification extends AppCompatActivity {
         current_user_email.setText(currentUser.getEmail());
     }
 
-    public void verified(View v){
+    public void verified(View v) {
         currentUser.reload();
         verified_user_status.setText(currentUser.getUid());
         current_user_status.setText(String.valueOf(currentUser.isEmailVerified()));
         current_user_email.setText(currentUser.getEmail());
-        if (currentUser != null && currentUser.isEmailVerified()){
+        if (currentUser != null && currentUser.isEmailVerified()) {
             Intent intent = new Intent(this, OnboardingActivity.class);
             startActivity(intent);
         } else {
             Toast.makeText(this, "Your email is not verified.", Toast.LENGTH_SHORT).show();
+            currentUser.reload();
+
+            if (currentUser != null && currentUser.isEmailVerified()) {
+                Intent intent = new Intent(this, OnboardingActivity.class);
+                startActivity(intent);
+
+            }
         }
     }
+
 }

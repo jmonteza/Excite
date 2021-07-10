@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import org.jetbrains.annotations.NotNull;
 
 public class AuthActivity extends AppCompatActivity {
+
     private FirebaseAuth mAuth;
     private EditText email_signup_et;
     private EditText password_signup_et;
@@ -102,9 +103,9 @@ public class AuthActivity extends AppCompatActivity {
 
 
     public void signUp(View v){
-        String email = email_signup_et.getText().toString();
-        String password = password_signup_et.getText().toString();
-        String verify_password = verify_password_signup_et.getText().toString();
+        String email = email_signup_et.getText().toString().trim();
+        String password = password_signup_et.getText().toString().trim();
+        String verify_password = verify_password_signup_et.getText().toString().trim();
 
         if (email.length() <= 0 || password.length() <= 0 || verify_password.length() <= 0){
             return;
@@ -121,8 +122,8 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     public void logIn(View v){
-        String email = email_login_et.getText().toString();
-        String password = password_login_et.getText().toString();
+        String email = email_login_et.getText().toString().trim();
+        String password = password_login_et.getText().toString().trim();
 
         if (email.length() <= 0 || password.length() <= 0){
             return;
