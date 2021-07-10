@@ -1,4 +1,4 @@
-package com.example.chatmatch;
+package com.example.chatmatch.Authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.chatmatch.R;
+import com.example.chatmatch.User.ProfilePhotoActivity;
+import com.example.chatmatch.User.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

@@ -1,4 +1,4 @@
-package com.example.chatmatch;
+package com.example.chatmatch.User;
 
 import com.google.firebase.firestore.ServerTimestamp;
 

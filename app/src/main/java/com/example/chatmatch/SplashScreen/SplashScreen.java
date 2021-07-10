@@ -1,11 +1,11 @@
-package com.example.chatmatch.splashscreen;
+package com.example.chatmatch.SplashScreen;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chatmatch.AuthActivity;
+import com.example.chatmatch.Authentication.AuthActivity;
 import com.example.chatmatch.R;
 
 public class SplashScreen extends AppCompatActivity {
