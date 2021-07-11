@@ -94,13 +94,12 @@ async function sendWelcomeEmail(email, displayName) {
 
 async function sendVerificationEmail(email, displayName, link) {
 
-    const htmlMessage = `Hello, <br> <br>
-    Welcome to Excite <br> <br>
-    Follow this link to verify your email address: <br> <br> 
-    <a href='${link}'>${link}</a> <br> <br>
-    We hope you'll enjoy our service. <br> <br>
-    Thanks, <br> <br>
-    Excite <br> <br>
+    const htmlMessage = `Hello, <br><br>
+    Follow this link to verify your email address: <br><br> 
+    <a href='${link}'>${link}</a> <br><br>
+    If you didn’t ask to verify this address, you can ignore this email. <br><br>
+    Thanks, <br><br>
+    Your Excite team <br><br>
     `
 
 
