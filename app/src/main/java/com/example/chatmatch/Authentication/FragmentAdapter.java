@@ -1,4 +1,4 @@
-package com.example.chatmatch;
+package com.example.chatmatch.Authentication;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chatmatch.AuthContainer;
+import com.example.chatmatch.Authentication.AuthContainer;
 import com.example.chatmatch.R;
 
 public class SplashScreen extends AppCompatActivity {

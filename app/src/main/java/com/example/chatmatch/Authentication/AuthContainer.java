@@ -1,4 +1,4 @@
-package com.example.chatmatch;
+package com.example.chatmatch.Authentication;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.example.chatmatch.R;
 
 public class AuthContainer extends AppCompatActivity {
     /**
@@ -29,6 +31,7 @@ public class AuthContainer extends AppCompatActivity {
         fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm,getLifecycle());
         pager2.setAdapter(adapter);
+        pager2.setUserInputEnabled(false);
     }
 
     public void goToFrag1(View v){
@@ -37,6 +40,10 @@ public class AuthContainer extends AppCompatActivity {
 
     public void goToFrag2(View v){
         pager2.setCurrentItem(1);
+    }
+
+    public void setCurrentPage(int index){
+        pager2.setCurrentItem(index);
     }
 
 }
