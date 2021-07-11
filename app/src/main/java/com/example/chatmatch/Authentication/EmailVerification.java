@@ -6,12 +6,17 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chatmatch.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.jetbrains.annotations.NotNull;
 
 public class EmailVerification extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -53,6 +58,17 @@ public class EmailVerification extends AppCompatActivity {
 
             }
         }
+    }
+
+    public void resendEmailVerification(View v){
+        currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(EmailVerification.this, "Email verification has been sent", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 }

@@ -94,20 +94,20 @@ async function sendWelcomeEmail(email, displayName) {
 
 async function sendVerificationEmail(email, displayName, link) {
 
-    const htmlMessage = `Hello ${displayName || ''}! <br> <br>
-    Please verify your account using this <a href='${link}'>link</a> <br> <br> 
-    If the link is not working, copy and paste the link below: <br> 
-    <a href='${link}'>${link}</a> <br>
+    const htmlMessage = `Hello, <br> <br>
+    Welcome to Excite <br> <br>
+    Follow this link to verify your email address: <br> <br> 
+    <a href='${link}'>${link}</a> <br> <br>
     We hope you'll enjoy our service. <br> <br>
-    Regards, <br>
-    Excite <br>
+    Thanks, <br> <br>
+    Excite <br> <br>
     `
 
 
     const mailOptions = {
         from: 'Excite <techiebuddy20@gmail.com>',
         to: email,
-        subject: "Welcome to Excite! Please verify your account.",
+        subject: "Welcome to Excite! Please verify your email.",
         html: htmlMessage
     };
 

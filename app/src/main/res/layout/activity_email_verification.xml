@@ -43,6 +43,13 @@
         android:text="I'm verified"
         android:backgroundTint="@color/primary"/>
 
+    <Button
+        android:id="@+id/resend_verification_btn"
+        android:onClick="resendEmailVerification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resend email"
+        android:backgroundTint="@color/primary"/>
 
     <TextView
         android:id="@+id/verified_status"
@@ -57,5 +64,7 @@
         android:layout_height="wrap_content"
         android:text="Current user status"
         android:backgroundTint="@color/primary"/>
+
+
 
 </LinearLayout>
