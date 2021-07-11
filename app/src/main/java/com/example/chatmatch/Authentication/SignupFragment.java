@@ -100,6 +100,9 @@ public class SignupFragment extends Fragment implements View.OnClickListener{
         if (id ==R.id.sign_up_btn){
             signUp();
         } else if (id ==R.id.login_redirect_btn){
+            email_signup_et.getText().clear();
+            password_signup_et.getText().clear();
+            verify_password_signup_et.getText().clear();
             ((AuthContainer)getActivity()).setCurrentPage(1);
         }
     }

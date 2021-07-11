@@ -100,6 +100,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.sign_up_redirect_btn) {
+            email_login_et.getText().clear();
+            password_login_et.getText().clear();
             ((AuthContainer) requireActivity()).setCurrentPage(0);
         } else if (id == R.id.log_in_btn) {
             login();
