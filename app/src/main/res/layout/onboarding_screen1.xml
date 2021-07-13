@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="First Name"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginTop="75dp"
+        android:layout_marginLeft="35dp"
+        android:textColor="@color/customColor"
+        android:textStyle="bold"
+        android:textSize="26sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This can't be changed Later"
+        app:layout_constraintTop_toBottomOf="@id/textName"
+        android:lineSpacingExtra="-4dp"
+        android:layout_marginTop="-10dp"
+        android:layout_marginLeft="35dp"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/onboard_primary"
+        android:id="@+id/chngtext"/>
+
+    <EditText
+        android:layout_width="262dp"
+        android:layout_height="52dp"
+        android:background="@drawable/edit_text_border_onboard"
+        app:layout_constraintTop_toBottomOf="@id/chngtext"
+        android:layout_marginLeft="35dp"
+        android:id="@+id/chngFactor"
+        android:maxLines="1"
+        android:paddingLeft="6dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="25dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/chngFactor"
+        android:text="Add Your Birthday"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/customColor"
+        android:textStyle="bold"
+        android:textSize="26sp"
+        android:layout_marginLeft="35dp"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginTop="145dp"
+        android:id="@+id/brthdayText"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/brthdayText"
+        android:text="There is something in there!"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="35dp"
+        android:fontFamily="@font/montserrat"
+        android:lineSpacingExtra="-4dp"
+        android:layout_marginTop="-10dp"
+        android:id="@+id/receveText"
+        android:textStyle="normal"
+        android:textColor="@color/onboard_primary"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/customColor"
+        app:layout_constraintLeft_toRightOf="@id/birthdayPicker"
+        app:layout_constraintTop_toBottomOf="@id/receveText"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="32dp"
+        android:textSize="19sp"
+        android:id="@+id/age_value"
+        android:fontFamily="@font/montserrat"/>
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/receveText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@drawable/birthday_icon"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="25dp"
+        android:id="@+id/birthdayPicker"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/testCore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="NEXT"
+        app:cornerRadius="9dp"
+        app:rippleColor="@color/rippleColor"
+        app:backgroundTint="@color/customColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

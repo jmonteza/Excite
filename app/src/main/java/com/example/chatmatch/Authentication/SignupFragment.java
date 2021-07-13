@@ -36,7 +36,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.activity_signup, container,false);
+        View view =  inflater.inflate(R.layout.email_sign_up, container,false);
 
         mAuth = FirebaseAuth.getInstance();
         email_signup_et = view.findViewById(R.id.email_signup_editText);

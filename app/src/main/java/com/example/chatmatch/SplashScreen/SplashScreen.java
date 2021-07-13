@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chatmatch.Authentication.AuthContainer;
 import com.example.chatmatch.R;
+import com.example.chatmatch.startup_page.startup_page;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class SplashScreen extends AppCompatActivity {
                     e.printStackTrace();
                 } finally {
                     //launch new activity / page after splash screen
-                    Intent intent = new Intent(SplashScreen.this, AuthContainer.class);
+                    Intent intent = new Intent(SplashScreen.this, startup_page.class);
                     startActivity(intent);
                     finish();
                 }

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="What Is Your Gender?"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginTop="65dp"
+        android:layout_marginLeft="45dp"
+        android:textColor="@color/customColor"
+        android:textStyle="bold"
+        android:textSize="26sp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textName2"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="30dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gender_selection"
+            app:layout_constraintTop_toBottomOf="@id/textName2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/gender_s1"
+            tools:ignore="NotSibling" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/gender_s1"
+            app:layout_constraintLeft_toLeftOf="@id/gender_s1"
+            android:text="Male"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="71dp"
+            android:textSize="16sp"
+            android:textColor="@color/onboard_primary"
+            android:fontFamily="@font/montserrat"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:layout_width="28dp"
+            android:layout_height="32dp"
+            android:id="@+id/gender_radio1"
+
+            app:layout_constraintTop_toTopOf="@id/gender_s1"
+            app:layout_constraintLeft_toLeftOf="@id/gender_s1"
+            android:layout_marginTop="18dp"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gender_selection"
+            app:layout_constraintTop_toBottomOf="@id/gender_s1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/gender_s2"
+            android:layout_marginTop="42.5dp"
+            tools:ignore="NotSibling" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/gender_s2"
+            app:layout_constraintLeft_toLeftOf="@id/gender_s2"
+            android:text="Female"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="71dp"
+            android:textSize="16sp"
+            android:textColor="@color/onboard_primary"
+            android:fontFamily="@font/montserrat"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:layout_width="28dp"
+            android:layout_height="32dp"
+            android:id="@+id/gender_radio2"
+            app:layout_constraintTop_toTopOf="@id/gender_s2"
+            app:layout_constraintLeft_toLeftOf="@id/gender_s2"
+            android:layout_marginTop="18dp"/>
+
+        <TextView
+            android:id="@+id/textName3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/gender_s2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="Who are you\n Intereted in?"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginTop="75dp"
+
+            android:textColor="@color/customColor"
+            android:textStyle="bold"
+            android:textSize="26sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gender_selection"
+            app:layout_constraintTop_toBottomOf="@id/textName3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="30dp"
+            android:id="@+id/gender_s4"
+            tools:ignore="NotSibling" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/gender_s4"
+            app:layout_constraintLeft_toLeftOf="@id/gender_s4"
+            android:text="Men"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="71dp"
+            android:textSize="16sp"
+            android:textColor="@color/onboard_primary"
+            android:fontFamily="@font/montserrat"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:layout_width="28dp"
+            android:layout_height="32dp"
+            android:id="@+id/gender_radio3"
+            app:layout_constraintTop_toTopOf="@id/gender_s4"
+            app:layout_constraintLeft_toLeftOf="@id/gender_s4"
+            android:layout_marginTop="18dp"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gender_selection"
+            app:layout_constraintTop_toBottomOf="@id/gender_s4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/gender_s5"
+            android:layout_marginTop="42.5dp"
+            tools:ignore="NotSibling" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/gender_s5"
+            app:layout_constraintLeft_toLeftOf="@id/gender_s5"
+            android:text="Women"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="71dp"
+            android:textSize="16sp"
+            android:textColor="@color/onboard_primary"
+            android:fontFamily="@font/montserrat"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:layout_width="28dp"
+            android:layout_height="32dp"
+            android:id="@+id/gender_radio4"
+            app:layout_constraintTop_toTopOf="@id/gender_s5"
+            app:layout_constraintLeft_toLeftOf="@id/gender_s5"
+            android:layout_marginTop="18dp"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/testCore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="NEXT"
+        app:cornerRadius="9dp"
+        app:rippleColor="@color/rippleColor"
+        app:backgroundTint="@color/customColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

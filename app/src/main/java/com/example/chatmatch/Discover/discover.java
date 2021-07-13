@@ -1,6 +1,10 @@
 package com.example.chatmatch.Discover;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -23,6 +27,8 @@ public class discover  extends AppCompatActivity {
     private MenuController menuController;
     private BottomNavigationView bottomNavigationView;
 
+
+    ImageButton filterBtn;
     ArrayList<MatchCardModel> matchCardModels;
     discoverAdapter discoverAdapter;
     @Override
@@ -61,6 +67,16 @@ public class discover  extends AppCompatActivity {
         //Ste matchadapter to recyclerview
         recyclerView.setAdapter(discoverAdapter);
 
+
+        filterBtn = findViewById(R.id.filter_btn);
+
+        filterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new discover_filter().show(getSupportFragmentManager(), "EDIT_TEXT2");
+            }
+        });
 
     }
 

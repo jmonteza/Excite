@@ -42,7 +42,7 @@ public class ProfilePhotoActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_picture);
+        setContentView(R.layout.activity_personal_profile);
         profile_photo_iv = findViewById(R.id.profile_picture_imageView);
         storage = FirebaseStorage.getInstance();
     }

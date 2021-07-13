@@ -29,4 +29,8 @@
     <color name = "custmEdit">#E3C4C4C4</color>
     <color name = "editvalue">#AB4E596F</color>
     <color name = "occupation">#8FFFFFFF</color>
+
+    <color name = "onboard_primary">#E64E596F</color>
+    <color name = "onboard_input">#33C4C4C4</color>
+    <color name = "select_photo">#B84E596F</color>
 </resources>
