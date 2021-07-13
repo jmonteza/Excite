@@ -12,6 +12,7 @@ import com.example.chatmatch.Discover.discover;
 import com.example.chatmatch.Matches.matches;
 import com.example.chatmatch.Messages.messageActivity;
 import com.example.chatmatch.R;
+import com.example.chatmatch.User.ProfilePhotoActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -55,6 +56,11 @@ public class MenuController implements NavigationView.OnNavigationItemSelectedLi
                         return true;
                     case R.id.connect:
                         intent = new Intent(context, discover.class);
+                        context.startActivity(intent);
+                        ((Activity)context).finish();
+                        return true;
+                    case R.id.userprofile:
+                        intent = new Intent(context, ProfilePhotoActivity.class);
                         context.startActivity(intent);
                         ((Activity)context).finish();
                         return true;
