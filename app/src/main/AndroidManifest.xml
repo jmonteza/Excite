@@ -30,6 +30,7 @@
         <activity android:name=".startup_page.onboard_page1"/>
         <activity android:name=".Authentication.phoneNumVerification"/>
         <activity android:name=".Authentication.EmailSign_up"/>
+        <activity android:name=".Messages.chatActivity"/>
             <activity android:name = ".startup_page.startup_page">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
