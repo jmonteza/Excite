@@ -41,7 +41,6 @@ public class ChatAdapter extends FirestoreRecyclerAdapter<ChatModel, ChatAdapter
         } else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.right_message_single, parent, false);
         }
-        // view = LayoutInflater.from(parent.getContext()).inflate(R.layout.left_message_single, parent, false);
         return new ChatHolder(view);
 
     }
