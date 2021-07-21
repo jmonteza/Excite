@@ -16,6 +16,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class ChatAdapter extends FirestoreRecyclerAdapter<ChatModel, ChatAdapter.ChatHolder> {
 
+    private final int MSG_TYPE_LEFT = 0;
+    private final int MSG_TYPE_RIGHT = 1;
 
     public ChatAdapter(@NonNull @NotNull FirestoreRecyclerOptions<ChatModel> options) {
         super(options);
@@ -23,31 +25,50 @@ public class ChatAdapter extends FirestoreRecyclerAdapter<ChatModel, ChatAdapter
 
     @Override
     protected void onBindViewHolder(@NonNull @NotNull ChatAdapter.ChatHolder holder, int position, @NonNull @NotNull ChatModel model) {
-        holder.message_tv.setText(model.getMessage());
-        // holder.receiver_tv.setText(model.getReceiver_uid());
-        // holder.sender_tv.setText(model.getSender_uid());
-        // holder.timestamp_tv.setText(String.valueOf(model.getTimestamp()));
+        if (holder.getItemViewType() == MSG_TYPE_LEFT){
+            holder.left_message_tv.setText(model.getMessage());
+        } else {
+            holder.right_message_tv.setText(model.getMessage());
+        }
     }
+
 
     @Override
     public @NotNull ChatHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sender_layout_single, parent, false);
+        View view;
+        if (viewType == MSG_TYPE_LEFT){
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.left_message_single, parent, false);
+        } else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.right_message_single, parent, false);
+        }
+        // view = LayoutInflater.from(parent.getContext()).inflate(R.layout.left_message_single, parent, false);
         return new ChatHolder(view);
+
     }
 
 
     public static class ChatHolder extends RecyclerView.ViewHolder {
-        TextView message_tv;
-        TextView receiver_tv;
-        TextView sender_tv;
-        TextView timestamp_tv;
+        TextView left_message_tv;
+        TextView right_message_tv;
 
         public ChatHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            message_tv = itemView.findViewById(R.id.message_sent_tv);
-            // receiver_tv = itemView.findViewById(R.id.receiver_uid_tv);
-            // sender_tv = itemView.findViewById(R.id.sender_uid_tv);
-            // timestamp_tv = itemView.findViewById(R.id.timestamp_tv);
+            left_message_tv = itemView.findViewById(R.id.left_message_text_view);
+            right_message_tv = itemView.findViewById(R.id.right_message_text_view);
+        }
+
+    }
+
+
+    @Override
+    public int getItemViewType(int position) {
+        // return super.getItemViewType(position);
+        if (super.getItem(position).getReceiver_uid().equals("left")){
+            // 0: left
+            return MSG_TYPE_LEFT;
+        } else {
+            // 1: right
+            return MSG_TYPE_RIGHT;
         }
     }
 }

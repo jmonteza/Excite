@@ -49,21 +49,7 @@ public class ChatActivity extends AppCompatActivity {
         FirestoreRecyclerOptions<ChatModel> options = new FirestoreRecyclerOptions.Builder<ChatModel>()
                 .setQuery(query, ChatModel.class).build();
 
-        // adapter = new FirestoreRecyclerAdapter<ChatModel, chatViewHolder>(options) {
-        //         //
-        //         //     public @NotNull chatViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        //         //         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sender_layout_single, parent, false);
-        //         //         return new chatViewHolder(view);
-        //         //     }
-        //         //
-        //         //     @Override
-        //         //     protected void onBindViewHolder(@NonNull @NotNull chatViewHolder holder, int position, @NonNull @NotNull ChatModel model) {
-        //         //         holder.message_tv.setText(model.getMessage());
-        //         //     }
-        //         // };
-
         adapter = new ChatAdapter(options);
-        // messages_list_recycler_view.setHasFixedSize(true);
         messages_list_recycler_view.setLayoutManager(new LinearLayoutManager(this));
         messages_list_recycler_view.setAdapter(adapter);
 
