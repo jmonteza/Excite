@@ -9,7 +9,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chatmatch.Authentication.EmailSign_up;
-import com.example.chatmatch.Messages.chatActivity;
+import com.example.chatmatch.Messages.ChatActivity;
 import com.example.chatmatch.R;
 
 public class startup_page extends AppCompatActivity {
@@ -28,7 +28,7 @@ public class startup_page extends AppCompatActivity {
         phnNumNavigate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(startup_page.this, chatActivity.class);
+                Intent intent = new Intent(startup_page.this, ChatActivity.class);
                 startActivity(intent);
 
             }
