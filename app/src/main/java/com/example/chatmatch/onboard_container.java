@@ -42,7 +42,7 @@ public class onboard_container extends AppCompatActivity {
         LayoutInflater factory = getLayoutInflater();
         View regisText = factory.inflate(R.layout.onboarding_screen1, null);
 
-        EditText test = (EditText) regisText.findViewById(R.id.chngFactor);
+        EditText test = (EditText) regisText.findViewById(R.id.firstName);
 
 //        String password = test.getText().toString().trim();
 //        Log.d("correct", password.toString());

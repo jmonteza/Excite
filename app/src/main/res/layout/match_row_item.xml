@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="530dp"
+    android:layout_width="370dp"
+    android:layout_height="438dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="25dp"
-    android:layout_margin="10dp"
+    android:layout_marginLeft="18dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="20dp"
+
+    android:layout_marginBottom="10dp"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
     android:id="@+id/matches_Cardview"
     app:cardElevation="6dp">
 
@@ -12,13 +18,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+
         android:id="@+id/cardlay"
         android:orientation="vertical">
 
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_gravity="center"
             android:scaleType="fitXY"
 

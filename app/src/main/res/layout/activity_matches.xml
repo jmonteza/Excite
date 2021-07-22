@@ -70,19 +70,19 @@
                 app:layout_constraintLeft_toLeftOf="@id/tabslct"
                 app:layout_constraintTop_toBottomOf="@id/mtch_lbl" />
 
-            <TextView
-                android:id="@+id/excite_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="64dp"
-                android:layout_marginTop="33dp"
-                android:text="Excite"
-                android:fontFamily="@font/montserrat"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textFontWeight="700"
-                app:layout_constraintLeft_toRightOf="@id/chat_lbl"
-                app:layout_constraintTop_toBottomOf="@id/mtch_lbl" />
+<!--            <TextView-->
+<!--                android:id="@+id/excite_lbl"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="64dp"-->
+<!--                android:layout_marginTop="33dp"-->
+<!--                android:text="Excite"-->
+<!--                android:fontFamily="@font/montserrat"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textFontWeight="700"-->
+<!--                app:layout_constraintLeft_toRightOf="@id/chat_lbl"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/mtch_lbl" />-->
 
 
             <androidx.recyclerview.widget.RecyclerView
