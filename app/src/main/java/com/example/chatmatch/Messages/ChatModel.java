@@ -1,22 +1,26 @@
 package com.example.chatmatch.Messages;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
 import java.util.Date;
 
 public class ChatModel {
     private String sender_uid;
     private String receiver_uid;
     private String message;
+
+    @ServerTimestamp
     private Date timestamp;
 
     public ChatModel(){
         // Empty constructor is needed
     }
 
-    public ChatModel(String sender_uid, String receiver_uid, String message, Date timestamp) {
+    public ChatModel(String sender_uid, String receiver_uid, String message) {
         this.sender_uid = sender_uid;
         this.receiver_uid = receiver_uid;
         this.message = message;
-        this.timestamp = timestamp;
+        this.timestamp = null;
     }
 
     public String getSender_uid() {
