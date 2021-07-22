@@ -31,6 +31,7 @@
         <activity android:name=".Authentication.phoneNumVerification"/>
         <activity android:name=".Discover.discover"/>
         <activity android:name=".Authentication.EmailSign_up"/>
+        <activity android:name=".Messages.ThreadActivity"/>
         <activity android:name=".Messages.ChatActivity"/>
             <activity android:name = ".startup_page.startup_page">
             <intent-filter>

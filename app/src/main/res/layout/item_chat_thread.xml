@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20sp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/thread_user_image_image_view"
+        android:layout_width="70sp"
+        android:layout_height="70sp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/femam3"
+        android:layout_marginStart="20sp"
+        android:adjustViewBounds="true"
+        app:shapeAppearanceOverlay="@style/circleImageView"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/thread_user_image_image_view"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="30sp"
+        android:padding="10sp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/thread_full_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hannah"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/primary"
+            android:layout_marginBottom="5sp"/>
+
+        <TextView
+            android:id="@+id/thread_recent_message_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thank you so much!"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
