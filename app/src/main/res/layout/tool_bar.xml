@@ -31,7 +31,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
         android:layout_marginRight="32dp"
-        android:background="@drawable/notification_bell"
+        android:background="@drawable/notifybells"
         android:contentDescription="AboutUs"
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
         app:layout_constraintRight_toLeftOf="@id/filter_btn"

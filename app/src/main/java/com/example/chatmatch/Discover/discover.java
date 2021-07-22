@@ -1,6 +1,8 @@
 package com.example.chatmatch.Discover;
 
+
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -32,13 +34,20 @@ public class discover  extends AppCompatActivity {
     private ArrayList<User> userProfileLst;
     private ProfileManager ProfileMgr = ProfileManager.getInstance();
 
+
+
+    private int swatchNumber;
+
     ImageButton filterBtn;
     ArrayList<MatchCardModel> matchCardModels;
     discoverAdapter discoverAdapter;
+    String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover);
+
+
 
         int id  = R.id.connect;
         // Menu Navigation
@@ -51,6 +60,7 @@ public class discover  extends AppCompatActivity {
 
 
         revealProfiles();
+
 
 
         //array to store pictures
@@ -88,17 +98,32 @@ public class discover  extends AppCompatActivity {
 
     }
 
+
+    //TODO: get id of all the users and their corresponding photo id
     public void revealProfiles(){
+
+        ArrayList<User> xp = new ArrayList<>();
         FirestoreAdapter firestoreAdapter = new FirestoreAdapter();
         firestoreAdapter.loadProfiles(new MyCallback() {
             @Override
             public void onCallback(ArrayList<User> user) {
                 for (int i = 0; i < user.size(); i++){
                     Log.d("First name of users", user.get(i).getFirstName());
+                    //xp.add(user.get(i).getUserId());
+
+
                 }
+
+
+
             }
 
+
         });
+
+
+
+
 //        Log.d("here", "i got here");
 //        userProfileLst = firestoreAdapter.loadProfiles();
 //        Log.d("size", userProfileLst.size()+"");

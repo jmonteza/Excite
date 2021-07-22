@@ -53,7 +53,6 @@ public class FirestoreAdapter extends DatabaseAdapter{
         ref.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
                 for( QueryDocumentSnapshot doc : queryDocumentSnapshots ) {
                     User user = processProfileSnapshot(doc);
                     profiles.add(user);

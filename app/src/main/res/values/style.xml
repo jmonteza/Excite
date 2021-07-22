@@ -4,6 +4,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="android:colorAccent">@color/customColor</item>
+        <item name="android:colorPrimaryDark">@color/customColor</item>
+        <item name="android:colorPrimary">@color/customColor</item>
     </style>
 
     <style name="CustomCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">
