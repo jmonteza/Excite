@@ -49,7 +49,6 @@ build/
 /bin1/
 java/build/**
 
-#.gradle/*
-
+.gradle/*
 
 firebase
