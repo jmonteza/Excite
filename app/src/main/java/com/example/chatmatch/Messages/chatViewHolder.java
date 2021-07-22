@@ -21,10 +21,10 @@ public class chatViewHolder extends RecyclerView.ViewHolder {
     public chatViewHolder(@NonNull @NotNull View itemView) {
         super(itemView);
 
-        message_tv = itemView.findViewById(R.id.message_sent_tv);
-        receiver_tv = itemView.findViewById(R.id.receiver_uid_tv);
-        sender_tv = itemView.findViewById(R.id.sender_uid_tv);
-        timestamp_tv = itemView.findViewById(R.id.timestamp_tv);
+        message_tv = itemView.findViewById(R.id.right_message_text_view);
+        // receiver_tv = itemView.findViewById(R.id.receiver_uid_tv);
+        // sender_tv = itemView.findViewById(R.id.sender_uid_tv);
+        // timestamp_tv = itemView.findViewById(R.id.timestamp_tv);
 
     }
 }
