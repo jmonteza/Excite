@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.chatmatch.Database.LocalUser;
 import com.example.chatmatch.R;
 import com.example.chatmatch.startup_page.onboard_page1;
 import com.example.chatmatch.startup_page.startup_page;
@@ -25,6 +29,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public class EmailSign_up extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -34,11 +40,19 @@ public class EmailSign_up extends AppCompatActivity {
     private FirebaseUser currentUser;
     private Button sign_up_btn;
     private ImageButton login_redirect_btn;
+    private ArrayList<String> curr_lst;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.email_sign_up);
+
+
+        sp = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
+
+
+
 
         mAuth = FirebaseAuth.getInstance();
         email_signup_et = findViewById(R.id.email_signup_editText);
@@ -71,9 +85,13 @@ public class EmailSign_up extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            curr_lst = new ArrayList<>();
+                            curr_lst.add(email);
+                            curr_lst.add(password);
                             currentUser = mAuth.getCurrentUser();
                             if (currentUser != null) {
                                 Intent intent = new Intent(EmailSign_up.this, onboard_page1.class);
+                                intent.putStringArrayListExtra("userDetails",  curr_lst);
                                 startActivity(intent);
                             }
                         } else {
@@ -84,10 +102,20 @@ public class EmailSign_up extends AppCompatActivity {
     }
 
     private void signUp(){
+
+
         String email = email_signup_et.getText().toString().trim();
         String password = password_signup_et.getText().toString().trim();
         String verify_password = verify_password_signup_et.getText().toString().trim();
 
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putString("email", email);
+        editor.putString("password", password);
+        editor.apply();
+
+//        LocalUser.saveLocalData(email, password);
+//        Toast.makeText(EmailSign_up.this, "info saved", Toast.LENGTH_LONG).show();
         if (email.length() <= 0 || password.length() <= 0 || verify_password.length() <= 0){
             Animation shake = AnimationUtils.loadAnimation(EmailSign_up.this, R.anim.shake);
             email_signup_et.startAnimation(shake);

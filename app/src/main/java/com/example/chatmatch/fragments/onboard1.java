@@ -36,7 +36,7 @@ public class onboard1 extends Fragment {
 
 
 //
-        frstName = rootView.findViewById(R.id.chngFactor);
+        frstName = rootView.findViewById(R.id.firstName);
         String password = frstName.getText().toString().trim();
 
         testbtn = rootView.findViewById(R.id.testCore);

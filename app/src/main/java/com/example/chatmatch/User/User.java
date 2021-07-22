@@ -14,6 +14,13 @@ public class User {
     private int grad_year;
     private String gender;
 
+    private String email;
+    private String password;
+    private String birthDay;
+    private String firstName;
+    private String interest_1;
+    private String userId;
+
     @ServerTimestamp
     private Date timestamp;
 
@@ -36,6 +43,49 @@ public class User {
         this.gender = gender;
         this.timestamp = null;
     }
+
+    public User(){
+
+    }
+
+    public User(String userId, String email, String password, String birthDay, String firstName, String gender, String interest_1){
+        this.userId = userId;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.gender = gender;
+        this.interest_1 = interest_1;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getBirthDay() {
+        return birthDay;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getInterest_1() {
+        return interest_1;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
 
     public String getName() {
         return name;

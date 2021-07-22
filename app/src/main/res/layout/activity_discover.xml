@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
 
+
         android:layout_marginBottom="80dp"
 
         tools:ignore="MissingConstraints">
@@ -24,6 +25,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             >
 
             <androidx.recyclerview.widget.RecyclerView
@@ -63,8 +65,9 @@
         android:id="@+id/baseText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_bold"
+        android:fontFamily="@font/montserrat"
         android:text="Discover"
+        android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="16dp"
         android:textColor="@color/white"

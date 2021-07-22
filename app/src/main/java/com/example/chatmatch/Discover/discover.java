@@ -1,8 +1,7 @@
 package com.example.chatmatch.Discover;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -11,11 +10,15 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.chatmatch.Matches.MatchAdapter;
+import com.example.chatmatch.Database.FirestoreAdapter;
+
+import com.example.chatmatch.Database.MyCallback;
 import com.example.chatmatch.Matches.MatchCardModel;
-import com.example.chatmatch.Matches.matches;
 import com.example.chatmatch.Menu.MenuController;
+import com.example.chatmatch.ObjectManager.ProfileManager;
 import com.example.chatmatch.R;
+import com.example.chatmatch.User.ProfilePhotoActivity;
+import com.example.chatmatch.User.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -26,7 +29,8 @@ public class discover  extends AppCompatActivity {
 
     private MenuController menuController;
     private BottomNavigationView bottomNavigationView;
-
+    private ArrayList<User> userProfileLst;
+    private ProfileManager ProfileMgr = ProfileManager.getInstance();
 
     ImageButton filterBtn;
     ArrayList<MatchCardModel> matchCardModels;
@@ -44,6 +48,10 @@ public class discover  extends AppCompatActivity {
         menuController.useMenu();
 
         recyclerView = findViewById(R.id.recycler_view);
+
+
+        revealProfiles();
+
 
         //array to store pictures
         Integer[] matches = {R.drawable.femam1
@@ -78,6 +86,25 @@ public class discover  extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void revealProfiles(){
+        FirestoreAdapter firestoreAdapter = new FirestoreAdapter();
+        firestoreAdapter.loadProfiles(new MyCallback() {
+            @Override
+            public void onCallback(ArrayList<User> user) {
+                for (int i = 0; i < user.size(); i++){
+                    Log.d("First name of users", user.get(i).getFirstName());
+                }
+            }
+
+        });
+//        Log.d("here", "i got here");
+//        userProfileLst = firestoreAdapter.loadProfiles();
+//        Log.d("size", userProfileLst.size()+"");
+//        for (int i = 0; i < userProfileLst.size(); i++){
+//            Log.d("user 1", userProfileLst.get(i)+"");
+//        }
     }
 
 }

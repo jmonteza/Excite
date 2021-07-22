@@ -58,7 +58,7 @@ public class ProfilePhotoActivity extends AppCompatActivity {
         menuController.useMenu();
     }
 
-    public void chooseFromGallery(View v) {
+    public void chooseFromGallery() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -74,9 +74,11 @@ public class ProfilePhotoActivity extends AppCompatActivity {
      private void uploadPhotoToFirebaseStorage(Bitmap bitmap){
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            User user = new User();
+            String curr_userId = user.getUserId();
+//            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             StorageReference reference = storage.getReference().child("images").child("profile")
-                    .child(uid + ".jpeg");
+                    .child(curr_userId + ".jpeg");
 
             reference.putBytes(baos.toByteArray()).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
