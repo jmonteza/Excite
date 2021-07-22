@@ -52,3 +52,6 @@ java/build/**
 .gradle/*
 
 firebase
+
+/local.properties
+/build
