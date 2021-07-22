@@ -67,6 +67,7 @@
         app:layout_constraintTop_toBottomOf="@id/simpleProgressBar"
         android:text="profile 46% complete"
         android:layout_marginLeft="31dp"
+        android:id="@+id/progress_barValue"
         android:layout_marginTop="10dp"
         android:textColor="@color/occupation"/>
 
@@ -98,6 +99,7 @@
 
         android:layout_width="81dp"
         android:layout_height="82dp"
+        android:onClick="chooseFromGallery"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:scaleType="centerCrop"
@@ -105,21 +107,352 @@
         android:layout_marginRight="25dp"
         android:src="@drawable/user_profile_picture" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="32dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="48dp"
 
-        android:onClick="chooseFromGallery"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/white"
-        android:scaleType="centerInside"
-        android:src="@drawable/plus"
-        app:fabCustomSize="32dp"
-        app:layout_constraintBottom_toBottomOf="@id/my_profile_picture_imageView"
 
-        app:layout_constraintLeft_toLeftOf="@id/my_profile_picture_imageView"
-        app:maxImageSize="20dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="326dp"
+        android:layout_height="480dp"
+        app:layout_constraintTop_toBottomOf="@id/progress_barValue"
+        android:layout_marginTop="58dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/cardHolder">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="326dp"
+            android:id="@+id/cnstrCard"
+            android:layout_marginBottom="20dp"
+            android:layout_height="480dp">
+            <ImageView
+                app:layout_constraintTop_toTopOf="@id/cnstrCard"
+                app:layout_constraintLeft_toLeftOf="@id/cnstrCard"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/connect"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/connectlogo"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Invite Friends"
+                app:layout_constraintTop_toTopOf="@id/cnstrCard"
+                app:layout_constraintLeft_toRightOf="@id/connectlogo"
+                android:layout_marginTop="21dp"
+                android:layout_marginLeft="34dp"
+                android:textColor="@color/black"
+                android:id="@+id/inviteFriend"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Share the excitement with friends"
+
+                app:layout_constraintTop_toBottomOf="@id/inviteFriend"
+                app:layout_constraintLeft_toRightOf="@id/connectlogo"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="34dp"
+                android:textColor="@color/profileColor"
+                android:textSize="9sp"/>
+            
+            <ImageButton
+                android:layout_width="42dp"
+                android:layout_height="35dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="23dp"
+                android:layout_marginRight="8dp"
+                android:id="@+id/nvgateFriends"
+                android:background="@drawable/invite_more_friends"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@id/nvgateFriends"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="18dp"
+                android:id="@+id/divider1"
+                android:background="@color/customdivider"/>
+
+                <!--  End of section 1      -->
+
+            <ImageView
+                app:layout_constraintTop_toBottomOf="@id/divider1"
+                app:layout_constraintLeft_toLeftOf="@id/cnstrCard"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/filter"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/filterlogo"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Filter"
+                app:layout_constraintTop_toBottomOf="@id/divider1"
+                app:layout_constraintLeft_toRightOf="@id/filterlogo"
+                android:layout_marginTop="21dp"
+                android:layout_marginLeft="34dp"
+                android:textColor="@color/black"
+                android:id="@+id/filterValues"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Custom filters"
+                app:layout_constraintTop_toBottomOf="@id/filterValues"
+                app:layout_constraintLeft_toRightOf="@id/filterlogo"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="34dp"
+
+                android:textColor="@color/profileColor"
+                android:textSize="9sp"/>
+
+            <ImageButton
+                android:layout_width="42dp"
+                android:layout_height="35dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider1"
+                android:layout_marginTop="23dp"
+                android:layout_marginRight="8dp"
+                android:id="@+id/nvgateFilter"
+                android:background="@drawable/invite_more_friends"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@id/nvgateFilter"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="18dp"
+                android:id="@+id/divider2"
+                android:background="@color/customdivider"/>
+
+            <!--        End of Section 2    -->
+
+            <ImageView
+                app:layout_constraintTop_toBottomOf="@id/divider2"
+                app:layout_constraintLeft_toLeftOf="@id/cnstrCard"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/alarm"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/notifylogo"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notification"
+                app:layout_constraintTop_toBottomOf="@id/divider2"
+                app:layout_constraintLeft_toRightOf="@id/notifylogo"
+                android:layout_marginTop="21dp"
+                android:layout_marginLeft="34dp"
+                android:textColor="@color/black"
+                android:id="@+id/notifyValues"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Custom in app notification"
+                app:layout_constraintTop_toBottomOf="@id/notifyValues"
+                app:layout_constraintLeft_toRightOf="@id/notifylogo"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="34dp"
+
+                android:textColor="@color/profileColor"
+                android:textSize="9sp"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider2"
+                android:layout_marginTop="23dp"
+                android:layout_marginRight="8dp"
+                android:id="@+id/notifyFilter"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@id/notifyFilter"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="18dp"
+                android:id="@+id/divider3"
+                android:background="@color/customdivider"/>
+
+                <!--  End of Section 3          -->
+
+            <ImageView
+                app:layout_constraintTop_toBottomOf="@id/divider3"
+                app:layout_constraintLeft_toLeftOf="@id/cnstrCard"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/feedback"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/feedbacklogo"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Feedback"
+                app:layout_constraintTop_toBottomOf="@id/divider3"
+                app:layout_constraintLeft_toRightOf="@id/feedbacklogo"
+                android:layout_marginTop="21dp"
+                android:layout_marginLeft="34dp"
+                android:textColor="@color/black"
+                android:id="@+id/feedbackValues"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="We welcome your feedbacks"
+                app:layout_constraintTop_toBottomOf="@id/feedbackValues"
+                app:layout_constraintLeft_toRightOf="@id/feedbacklogo"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="34dp"
+
+                android:textColor="@color/profileColor"
+                android:textSize="9sp"/>
+
+            <ImageButton
+                android:layout_width="42dp"
+                android:layout_height="35dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider3"
+                android:layout_marginTop="23dp"
+                android:layout_marginRight="8dp"
+                android:id="@+id/feedbackFilter"
+                android:background="@drawable/invite_more_friends"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@id/feedbackFilter"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="18dp"
+                android:id="@+id/divider4"
+                android:background="@color/customdivider"/>
+            <!--    End of section 4        -->
+
+            <ImageView
+                app:layout_constraintTop_toBottomOf="@id/divider4"
+                app:layout_constraintLeft_toLeftOf="@id/cnstrCard"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/report_issue"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/reportlogo"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Report Issue"
+                app:layout_constraintTop_toBottomOf="@id/divider4"
+                app:layout_constraintLeft_toRightOf="@id/reportlogo"
+                android:layout_marginTop="21dp"
+                android:layout_marginLeft="34dp"
+                android:textColor="@color/black"
+                android:id="@+id/reportValues"
+                android:textSize="14sp"/>
+
+
+            <ImageButton
+                android:layout_width="42dp"
+                android:layout_height="35dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider4"
+                android:layout_marginTop="23dp"
+                android:layout_marginRight="8dp"
+                android:id="@+id/reportFilter"
+                android:background="@drawable/invite_more_friends"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@id/reportFilter"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="18dp"
+                android:id="@+id/divider5"
+                android:background="@color/customdivider"/>
+
+            <!--      End of Section 5      -->
+
+            <ImageView
+                app:layout_constraintTop_toBottomOf="@id/divider5"
+                app:layout_constraintLeft_toLeftOf="@id/cnstrCard"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/settings"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/settingslogo"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                app:layout_constraintTop_toBottomOf="@id/divider5"
+                app:layout_constraintLeft_toRightOf="@id/settingslogo"
+                android:layout_marginTop="21dp"
+                android:layout_marginLeft="34dp"
+                android:textColor="@color/black"
+                android:id="@+id/settingsValues"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Custom Settings"
+                app:layout_constraintTop_toBottomOf="@id/settingsValues"
+                app:layout_constraintLeft_toRightOf="@id/settingslogo"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="34dp"
+
+                android:textColor="@color/profileColor"
+                android:textSize="9sp"/>
+
+            <ImageButton
+                android:layout_width="42dp"
+                android:layout_height="35dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider5"
+                android:layout_marginTop="23dp"
+                android:layout_marginRight="8dp"
+                android:id="@+id/settingsFilter"
+                android:background="@drawable/invite_more_friends"/>
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/settingsFilter"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                android:layout_marginTop="18dp"-->
+<!--                android:id="@+id/divider6"-->
+<!--                android:background="@color/customdivider"/>-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"

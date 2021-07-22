@@ -173,4 +173,10 @@ public class ProfilePhotoActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void chooseFromGallery(View view) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, SELECT_IMAGE_CODE);
+    }
 }

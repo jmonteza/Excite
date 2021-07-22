@@ -33,4 +33,6 @@
     <color name = "onboard_primary">#E64E596F</color>
     <color name = "onboard_input">#33C4C4C4</color>
     <color name = "select_photo">#B84E596F</color>
+    <color name = "customdivider">#2B4E596F</color>
+    <color name="profileColor">#8F000000</color>
 </resources>
