@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -18,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.chatmatch.Database.LocalUser;
+import com.example.chatmatch.Discover.discover;
 import com.example.chatmatch.R;
 import com.example.chatmatch.startup_page.onboard_page1;
 import com.example.chatmatch.startup_page.startup_page;
@@ -66,6 +68,16 @@ public class EmailSign_up extends AppCompatActivity {
             }
         });
 
+        SharedPreferences preferences = getSharedPreferences("remember_user", MODE_PRIVATE);
+        String remembered = preferences.getString("remember", "");
+
+        if (remembered.equals("true")){
+            Intent intent = new Intent(EmailSign_up.this, discover.class);
+            startActivity(intent);
+        }
+        else if (remembered.equals("false")){
+            Log.d("not logged in", "please log in ");
+        }
         login_redirect_btn = findViewById(R.id.login_redirect_btn);
         login_redirect_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,10 +98,20 @@ public class EmailSign_up extends AppCompatActivity {
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             curr_lst = new ArrayList<>();
-                            curr_lst.add(email);
-                            curr_lst.add(password);
+
                             currentUser = mAuth.getCurrentUser();
                             if (currentUser != null) {
+                                curr_lst.add(email);
+                                curr_lst.add(password);
+
+                                SharedPreferences preferences = getSharedPreferences("remember_user", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("remember", "true");
+                                editor.apply();
+
+
+
+
                                 Intent intent = new Intent(EmailSign_up.this, onboard_page1.class);
                                 intent.putStringArrayListExtra("userDetails",  curr_lst);
                                 startActivity(intent);
