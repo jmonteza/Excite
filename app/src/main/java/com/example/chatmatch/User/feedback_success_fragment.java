@@ -1,4 +1,4 @@
-package com.example.chatmatch.Discover;
+package com.example.chatmatch.User;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,11 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -23,26 +26,40 @@ import com.example.chatmatch.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link discover_filter} factory method to
+ * Use the {@link feedback_success_fragment } factory method to
  * create an instance of this fragment.
  */
-public class discover_filter extends DialogFragment {
+public class feedback_success_fragment extends DialogFragment {
 
 
-    public discover_filter() {
+    private Button exitBtn;
+    private FragmentActivity myContext;
+    public feedback_success_fragment () {
 
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.custom_filter_fragment, null);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_feedback_success_fragment, null);
+
+        exitBtn = view.findViewById(R.id.exitFeedback);
+        exitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragManager = myContext.getSupportFragmentManager();
+                Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("feedbackFragment");
+                if(fragment != null)
+                    getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+//                fragManager.popBackStack(FeedbackFragment.class, 0);
+            }
+        });
 
         // we create the actual dialog here
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         return builder
                 .setView(view)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton("", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // nothing to really do with this I guess
@@ -51,9 +68,15 @@ public class discover_filter extends DialogFragment {
                 .create();
 
 
+
     }
 
 
+    @Override
+    public void onAttach(Activity activity) {
+        myContext=(FragmentActivity) activity;
+        super.onAttach(activity);
+    }
 
     /**
      * When the avatar selector returns with the selected avatar we need to update the views

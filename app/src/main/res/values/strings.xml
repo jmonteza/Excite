@@ -24,4 +24,5 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="how_s_your_experience_been_with_excite_n_we_would_love_to_hear_your_feedback">How’s your experience been with <font color= "#F54B64">Excite </font> </string>
 </resources>

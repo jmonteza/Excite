@@ -35,4 +35,5 @@
     <color name = "select_photo">#B84E596F</color>
     <color name = "customdivider">#2B4E596F</color>
     <color name="profileColor">#8F000000</color>
+    <color name = "feedback">#21000000</color>
 </resources>

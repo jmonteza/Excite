@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.chatmatch.Discover.discover_filter;
 import com.example.chatmatch.Matches.matches;
 import com.example.chatmatch.Menu.MenuController;
 import com.example.chatmatch.R;
@@ -44,6 +46,7 @@ public class ProfilePhotoActivity extends AppCompatActivity {
     private MenuController menuController;
     private BottomNavigationView bottomNavigationView;
 
+    ImageButton nvgteFeedback;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,15 @@ public class ProfilePhotoActivity extends AppCompatActivity {
 
         menuController = new MenuController(ProfilePhotoActivity.this,bottomNavigationView, id);
         menuController.useMenu();
+
+        nvgteFeedback = findViewById(R.id.feedbackFilter);
+
+        nvgteFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new FeedbackFragment().show(getSupportFragmentManager(), "feedbackFragment");
+            }
+        });
     }
 
     public void chooseFromGallery() {
