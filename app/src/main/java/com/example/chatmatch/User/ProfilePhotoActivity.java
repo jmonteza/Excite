@@ -46,6 +46,8 @@ public class ProfilePhotoActivity extends AppCompatActivity {
     private MenuController menuController;
     private BottomNavigationView bottomNavigationView;
 
+    private ImageButton reportIssue;
+    private ImageButton nvgateFilter;
     ImageButton nvgteFeedback;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,18 +56,36 @@ public class ProfilePhotoActivity extends AppCompatActivity {
         profile_photo_iv = findViewById(R.id.profile_picture_imageView);
         storage = FirebaseStorage.getInstance();
         int id  = R.id.userprofile;
+
+
+
         // Menu Navigation
         bottomNavigationView = findViewById(R.id.bottomNav);
 
         menuController = new MenuController(ProfilePhotoActivity.this,bottomNavigationView, id);
         menuController.useMenu();
 
+        nvgateFilter = findViewById(R.id.nvgateFilter);
+        nvgateFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new discover_filter().show(getSupportFragmentManager(), "filterFragment");
+            }
+        });
         nvgteFeedback = findViewById(R.id.feedbackFilter);
 
         nvgteFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new FeedbackFragment().show(getSupportFragmentManager(), "feedbackFragment");
+            }
+        });
+
+        reportIssue = findViewById(R.id.reportFilter);
+        reportIssue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new report_issue().show(getSupportFragmentManager(), "issueFragment");
             }
         });
     }

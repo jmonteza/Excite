@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragContainer"
+    android:id="@+id/reportContainer"
     android:paddingBottom="25dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,72 +14,60 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/feedBcaktxt"
+        android:id="@+id/reportBug"
+        android:text = "Report a Bug"
         android:textStyle="bold"
         android:textSize="18sp"
         android:fontFamily="@font/montserrat"
         android:layout_marginTop="34dp"
-        android:textColor="@color/customColor"
-        android:text="Feedback"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/feedBcaktxt"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/feedBcaklowertxt"
-        android:textStyle="bold"
-        android:textSize="13sp"
-        android:fontFamily="@font/montserrat"
-        android:layout_marginTop="12dp"
-        android:textColor="@color/profileColor"
-        android:letterSpacing="0.045"
-        android:text="@string/how_s_your_experience_been_with_excite_n_we_would_love_to_hear_your_feedback"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/feedBcaklowertxt"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/feedBcaklowertxt2"
-        android:textStyle="bold"
-        android:textSize="13sp"
-        android:fontFamily="@font/montserrat"
-        android:layout_marginTop="2dp"
-        android:textColor="@color/profileColor"
-        android:letterSpacing="0.045"
-        android:text=" we would love to hear your feedback "/>
+        android:textColor="@color/customColor"/>
 
     <EditText
-        android:layout_width="289dp"
-        android:layout_height="178dp"
-        android:text="Comments"
+        android:layout_width="304dp"
+        android:layout_height="52dp"
+        android:hint="Title"
         android:textSize="13sp"
-        android:fontFamily="@font/roboto_bold"
+        android:fontFamily="@font/montserrat"
         android:textColor="@color/profileColor"
         android:gravity="top|left"
         android:paddingTop="20dp"
         android:paddingLeft="36dp"
         android:paddingRight="36dp"
-
-        app:layout_constraintTop_toBottomOf="@id/feedBcaklowertxt"
+        app:layout_constraintTop_toBottomOf="@id/reportBug"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="@color/feedback"
-        android:id="@+id/editfeebcak"
-        android:layout_marginTop="50dp"/>
+        android:background="@color/report"
+        android:clickable="true"
+        android:onClick="iscompleted"
+        android:id="@+id/reportIssue"
+        android:layout_marginTop="30dp"/>
 
+    <EditText
+        android:layout_width="304dp"
+        android:layout_height="178dp"
+        android:hint="Description"
+        android:textSize="13sp"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/profileColor"
+        android:gravity="top|left"
+        android:paddingTop="20dp"
+        android:paddingLeft="36dp"
+        android:paddingRight="36dp"
+        app:layout_constraintTop_toBottomOf="@id/reportIssue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@color/report"
+        android:id="@+id/editfeebcak"
+        android:layout_marginTop="30dp"/>
 
     <com.google.android.material.button.MaterialButton
-        android:layout_width="289dp"
+        android:layout_width="304dp"
         android:layout_height="70dp"
         app:layout_constraintTop_toBottomOf="@id/editfeebcak"
         android:backgroundTint="@color/customColor"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Send Feedback"
+        android:text="SUBMIT"
         android:fontFamily="@font/montserrat"
         android:textStyle="bold"
         android:padding = "10dp"
@@ -87,7 +76,6 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="30dp"
         android:id="@+id/sndFeedback"/>
-
 
 
 

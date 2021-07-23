@@ -3,7 +3,7 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_200">#F54B64</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name = "primary">#F54B64</color>
@@ -19,8 +19,7 @@
     <color name="card5">#e27c6f</color>
     <color name = "customColor">#F54B64</color>
     <color name = "rippleColor">#42F54B64</color>
-    <color name="card6">#c9e3db</color>
-    <color name="card7">#86d098</color>
+    <color name="card6">#F54B64</color>
 
     <color name="input">#f1f1f1</color>
     <color name = "cstmstroke">#F3F3F3</color>
@@ -36,4 +35,5 @@
     <color name = "customdivider">#2B4E596F</color>
     <color name="profileColor">#8F000000</color>
     <color name = "feedback">#21000000</color>
+    <color name = "report">#21C4C4C4</color>
 </resources>

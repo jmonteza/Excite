@@ -10,33 +10,40 @@
 
 
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/filter_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="55dp"
+        android:layout_height="56dp"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+
+        app:iconSize="25dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/filter_btn"
+        app:cornerRadius="9dp"
+        app:rippleColor="@color/rippleColor"
+        app:icon="@drawable/filter_val"
+        android:backgroundTint="@color/customColor"
         android:contentDescription="AboutUs"
         android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:paddingTop="10dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
 
-    <ImageButton
-        android:id="@+id/notify_bell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:layout_marginRight="32dp"
-        android:background="@drawable/notifybells"
-        android:contentDescription="AboutUs"
-        app:layout_constraintBottom_toBottomOf="@id/toolbar"
-        app:layout_constraintRight_toLeftOf="@id/filter_btn"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.147" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/notify_bell"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="28dp"-->
+<!--        android:layout_marginRight="32dp"-->
+<!--        android:background="@drawable/notifybell_new"-->
+<!--        android:contentDescription="AboutUs"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/toolbar"-->
+<!--        app:layout_constraintRight_toLeftOf="@id/filter_btn"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.147" />-->
 
     <ImageButton
         android:id="@+id/notify_item"

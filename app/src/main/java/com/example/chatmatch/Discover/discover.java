@@ -22,6 +22,7 @@ import com.example.chatmatch.R;
 import com.example.chatmatch.User.ProfilePhotoActivity;
 import com.example.chatmatch.User.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ public class discover  extends AppCompatActivity {
 
     private int swatchNumber;
 
-    ImageButton filterBtn;
+    MaterialButton filterBtn;
     ArrayList<MatchCardModel> matchCardModels;
     discoverAdapter discoverAdapter;
     String id;
