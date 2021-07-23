@@ -1,6 +1,6 @@
 package com.example.chatmatch.Messages;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKey;
 
 import com.example.chatmatch.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -22,6 +24,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 public class ChatActivity extends AppCompatActivity {
     /**
@@ -56,16 +61,42 @@ public class ChatActivity extends AppCompatActivity {
         // send_btn = findViewById(R.id.send_message_button);
         message_et = findViewById(R.id.message_edit_text);
 
-        setUpRecyclerView();
+        try {
+            setUpRecyclerView();
+        } catch (GeneralSecurityException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void setUpRecyclerView() {
+    private void setUpRecyclerView() throws GeneralSecurityException, IOException {
         // Query
 
-        Intent intent = getIntent();
-        String thread_id = intent.getStringExtra("thread_id");
-        Log.d(TAG, "THREAD ID: " + thread_id);
-        messagesRef  = db.collection("threads").document("ARDs9yqoqajh5O14XNxS").collection("messages");
+        // Intent intent = getIntent();
+        //
+        // Log.d(TAG, "THREAD ID: " + thread_id);
+
+        // SharedPreferences sharedPref = getSharedPreferences("ExciteEncryptedSharedPref", MODE_PRIVATE);
+
+        Context context = getApplicationContext();
+        MasterKey masterKey = new MasterKey.Builder(context)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build();
+
+        EncryptedSharedPreferences sharedPreferences = (EncryptedSharedPreferences) EncryptedSharedPreferences
+                .create(
+                        context,
+                        "ExciteEncryptedSharedPref",
+                        masterKey,
+                        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+                );
+
+
+        String thread_id = sharedPreferences.getString("thread_id", "");
+
+
+        assert thread_id != null;
+        messagesRef  = db.collection("threads").document(thread_id).collection("messages");
 
         Query query = messagesRef.orderBy("timestamp", Query.Direction.ASCENDING);
 

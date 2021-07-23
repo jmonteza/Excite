@@ -1,5 +1,6 @@
 package com.example.chatmatch.Messages;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKey;
 
 import com.example.chatmatch.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -19,7 +22,10 @@ import com.google.firebase.firestore.Query;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ThreadActivity extends AppCompatActivity {
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+
+public class ThreadActivity extends AppCompatActivity{
     /**
      * {@inheritDoc}
      * <p>
@@ -34,6 +40,9 @@ public class ThreadActivity extends AppCompatActivity {
 
     private RecyclerView threads_list_recycler_view;
     private ThreadAdapter adapter;
+
+    private ThreadCallback threadCallback;
+
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,18 +79,35 @@ public class ThreadActivity extends AppCompatActivity {
 
         adapter.setOnItemClickListener(new ThreadAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) throws GeneralSecurityException, IOException {
+                String thread_id = documentSnapshot.getId();
+                // SharedPreferences sharedPref = context.getSharedPreferences("ExciteSharedPref", Context.MODE_PRIVATE);
+                // SharedPreferences.Editor editor = sharedPref.edit();
+                // editor.putString("thread_id", id);
+                // editor.apply();
 
+                Context context = ThreadActivity.this;
+                MasterKey masterKey = new MasterKey.Builder(context)
+                        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                        .build();
+
+                EncryptedSharedPreferences sharedPreferences = (EncryptedSharedPreferences) EncryptedSharedPreferences
+                        .create(
+                                context,
+                                "ExciteEncryptedSharedPref",
+                                masterKey,
+                                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+                        );
+                
+                sharedPreferences.edit().putString("thread_id", thread_id).apply();
+                
                 Intent intent = new Intent(ThreadActivity.this, ChatActivity.class);
-                intent.putExtra("threadID", documentSnapshot.getId());
                 startActivity(intent);
-
-                // foo(new Callback() {
-                //     @Override
-                //     public void myResponseCallback(String result) {
-                //
-                //     }
-                // });
+                // threadCallback.displayDrink(id);
+                // Intent intent = new Intent(ThreadActivity.this, ChatActivity.class);
+                // intent.putExtra("threadID", "ARDs9yqoqajh5O14XNxS");
+                // startActivity(intent);
             }
         });
     }
@@ -98,14 +124,20 @@ public class ThreadActivity extends AppCompatActivity {
         adapter.stopListening();
     }
 
-    // public interface Callback{
-    //     void myResponseCallback(String result);
-    // }
+    // @Override
+    // public void displayDrink(String threadID) {
     //
-    // public void foo(final Callback callback){
-    //     Intent intent = new Intent(ThreadActivity.this, ChatActivity.class);
-    //     intent.putExtra("threadID",documentSnapshot.getId());
-    //     startActivity(intent);
+    //     intent.putExtra("thread_id", threadID);
+    //
     // }
+
+    // public interface ThreadCallback {
+    //
+    // }
+
+
+
+
+
 
 }

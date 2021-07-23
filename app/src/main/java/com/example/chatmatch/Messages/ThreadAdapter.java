@@ -17,6 +17,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+
 public class ThreadAdapter extends FirestoreRecyclerAdapter<ThreadModel, ThreadAdapter.ThreadHolder> {
 
     private OnItemClickListener listener;
@@ -92,7 +95,11 @@ public class ThreadAdapter extends FirestoreRecyclerAdapter<ThreadModel, ThreadA
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION  && listener != null){
-                        listener.onItemClick(getSnapshots().getSnapshot(position), position);
+                        try {
+                            listener.onItemClick(getSnapshots().getSnapshot(position), position);
+                        } catch (InterruptedException | GeneralSecurityException | IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             });
@@ -102,7 +109,7 @@ public class ThreadAdapter extends FirestoreRecyclerAdapter<ThreadModel, ThreadA
     }
 
     public interface OnItemClickListener{
-        void onItemClick(DocumentSnapshot documentSnapshot, int position);
+        void onItemClick(DocumentSnapshot documentSnapshot, int position) throws InterruptedException, GeneralSecurityException, IOException;
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
