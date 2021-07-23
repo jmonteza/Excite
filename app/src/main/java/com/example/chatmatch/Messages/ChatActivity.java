@@ -1,5 +1,6 @@
 package com.example.chatmatch.Messages;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,10 +40,11 @@ public class ChatActivity extends AppCompatActivity {
 
     private static final String TAG = "ChatActivity";
 
-    // private ImageButton send_btn;
     private EditText message_et;
 
     private LinearLayoutManager layout_manager;
+
+    private CollectionReference messagesRef;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -59,7 +61,11 @@ public class ChatActivity extends AppCompatActivity {
 
     private void setUpRecyclerView() {
         // Query
-        CollectionReference messagesRef = db.collection("messages");
+
+        Intent intent = getIntent();
+        String thread_id = intent.getStringExtra("thread_id");
+        Log.d(TAG, "THREAD ID: " + thread_id);
+        messagesRef  = db.collection("threads").document("ARDs9yqoqajh5O14XNxS").collection("messages");
 
         Query query = messagesRef.orderBy("timestamp", Query.Direction.ASCENDING);
 
@@ -75,7 +81,7 @@ public class ChatActivity extends AppCompatActivity {
         scrollToBottom();
     }
 
-    private void scrollToBottom(){
+    private void scrollToBottom() {
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -83,7 +89,7 @@ public class ChatActivity extends AppCompatActivity {
                 int messageCount = adapter.getItemCount();
                 int lastVisiblePosition = layout_manager.findLastVisibleItemPosition();
 
-                if (lastVisiblePosition == -1 || positionStart >= (messageCount - 1)){
+                if (lastVisiblePosition == -1 || positionStart >= (messageCount - 1)) {
                     layout_manager.scrollToPosition(positionStart);
                 }
             }
@@ -102,10 +108,10 @@ public class ChatActivity extends AppCompatActivity {
         adapter.startListening();
     }
 
-    public void sendMessage(View v){
+    public void sendMessage(View v) {
         String message_value = message_et.getText().toString();
         ChatModel message = new ChatModel("Sender UID", "Right", message_value);
-        db.collection("messages").add(message).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        messagesRef.add(message).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.d(TAG, "DocumentSnapshot successfully written!");

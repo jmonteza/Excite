@@ -82,4 +82,6 @@ dependencies {
     // FirebaseUI for Cloud Storage
     implementation 'com.firebaseui:firebase-ui-storage:7.2.0'
 
+    implementation 'androidx.palette:palette:1.0.0'
+
 }
