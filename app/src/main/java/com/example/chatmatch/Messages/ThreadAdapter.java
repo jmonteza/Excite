@@ -13,11 +13,13 @@ import com.example.chatmatch.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
 public class ThreadAdapter extends FirestoreRecyclerAdapter<ThreadModel, ThreadAdapter.ThreadHolder> {
 
+    private OnItemClickListener listener;
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -70,6 +72,10 @@ public class ThreadAdapter extends FirestoreRecyclerAdapter<ThreadModel, ThreadA
         return new ThreadHolder(view);
     }
 
+    public void deleteThread(int position){
+        getSnapshots().getSnapshot(position).getReference().delete();
+    }
+
     class ThreadHolder extends RecyclerView.ViewHolder {
         private ShapeableImageView thread_user_image;
         private TextView thread_fullname;
@@ -80,7 +86,27 @@ public class ThreadAdapter extends FirestoreRecyclerAdapter<ThreadModel, ThreadA
             thread_user_image = itemView.findViewById(R.id.thread_user_image_image_view);
             thread_fullname = itemView.findViewById(R.id.thread_full_name_text_view);
             thread_recent_message = itemView.findViewById(R.id.thread_recent_message_text_view);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION  && listener != null){
+                        listener.onItemClick(getSnapshots().getSnapshot(position), position);
+                    }
+                }
+            });
+
         }
+
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 
 }

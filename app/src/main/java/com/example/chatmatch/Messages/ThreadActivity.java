@@ -1,17 +1,23 @@
 package com.example.chatmatch.Messages;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chatmatch.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import org.jetbrains.annotations.NotNull;
 
 public class ThreadActivity extends AppCompatActivity {
     /**
@@ -50,6 +56,34 @@ public class ThreadActivity extends AppCompatActivity {
 
         threads_list_recycler_view.setLayoutManager(new LinearLayoutManager(this));
         threads_list_recycler_view.setAdapter(adapter);
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public void onSwiped(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int direction) {
+                adapter.deleteThread(viewHolder.getAdapterPosition());
+            }
+            @Override
+            public boolean onMove(@NonNull @NotNull RecyclerView recyclerView, @NonNull @NotNull RecyclerView.ViewHolder viewHolder, @NonNull @NotNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+        }).attachToRecyclerView(threads_list_recycler_view);
+
+        adapter.setOnItemClickListener(new ThreadAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+
+                Intent intent = new Intent(ThreadActivity.this, ChatActivity.class);
+                intent.putExtra("threadID", documentSnapshot.getId());
+                startActivity(intent);
+
+                // foo(new Callback() {
+                //     @Override
+                //     public void myResponseCallback(String result) {
+                //
+                //     }
+                // });
+            }
+        });
     }
 
     @Override
@@ -63,4 +97,15 @@ public class ThreadActivity extends AppCompatActivity {
         super.onStop();
         adapter.stopListening();
     }
+
+    // public interface Callback{
+    //     void myResponseCallback(String result);
+    // }
+    //
+    // public void foo(final Callback callback){
+    //     Intent intent = new Intent(ThreadActivity.this, ChatActivity.class);
+    //     intent.putExtra("threadID",documentSnapshot.getId());
+    //     startActivity(intent);
+    // }
+
 }
