@@ -115,5 +115,5 @@ public class ThreadAdapter extends FirestoreRecyclerAdapter<ThreadModel, ThreadA
     public void setOnItemClickListener(OnItemClickListener listener){
         this.listener = listener;
     }
-
+    
 }

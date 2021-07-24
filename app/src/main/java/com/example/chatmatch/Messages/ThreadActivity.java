@@ -1,5 +1,6 @@
 package com.example.chatmatch.Messages;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ public class ThreadActivity extends AppCompatActivity{
 
     private ThreadCallback threadCallback;
 
+    private Query query;
+
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +60,9 @@ public class ThreadActivity extends AppCompatActivity{
     }
 
     private void setUpRecyclerView(){
-        Query query = threadRef.orderBy("timestamp", Query.Direction.DESCENDING);
+        //
+        query = threadRef.whereArrayContains("members", "ax1").orderBy("timestamp", Query.Direction.DESCENDING);
+        // query = threadRef.orderBy("timestamp", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<ThreadModel> options = new FirestoreRecyclerOptions.Builder<ThreadModel>()
                 .setQuery(query,ThreadModel.class).build();
 
@@ -81,10 +86,6 @@ public class ThreadActivity extends AppCompatActivity{
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) throws GeneralSecurityException, IOException {
                 String thread_id = documentSnapshot.getId();
-                // SharedPreferences sharedPref = context.getSharedPreferences("ExciteSharedPref", Context.MODE_PRIVATE);
-                // SharedPreferences.Editor editor = sharedPref.edit();
-                // editor.putString("thread_id", id);
-                // editor.apply();
 
                 Context context = ThreadActivity.this;
                 MasterKey masterKey = new MasterKey.Builder(context)
@@ -136,8 +137,33 @@ public class ThreadActivity extends AppCompatActivity{
     // }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // adapter.startListening();
+        // query = threadRef.whereArrayContains("members", "ax1").orderBy("timestamp", Query.Direction.DESCENDING);
+        // FirestoreRecyclerOptions<ThreadModel> options = new FirestoreRecyclerOptions.Builder<ThreadModel>()
+        //         .setQuery(query,ThreadModel.class).build();
+    }
 
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        adapter.stopListening();
+    }
 
-
+    /**
+     * Called when the activity has detected the user's press of the back
+     * key. The {@link #getOnBackPressedDispatcher() OnBackPressedDispatcher} will be given a
+     * chance to handle the back button before the default behavior of
+     * {@link Activity#onBackPressed()} is invoked.
+     *
+     * @see #getOnBackPressedDispatcher()
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

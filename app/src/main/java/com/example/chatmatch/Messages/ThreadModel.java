@@ -1,22 +1,33 @@
 package com.example.chatmatch.Messages;
 
 import java.util.Date;
+import java.util.List;
 
 public class ThreadModel {
     private String photoURI;
     private String last_message;
     private String full_name;
     private Date timestamp;
+    private List<String> members;
 
-    public ThreadModel(){
+    public ThreadModel() {
 
     }
 
-    public ThreadModel(String photoURI, String last_message, String full_name, Date timestamp) {
+    public List<String> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<String> members) {
+        this.members = members;
+    }
+
+    public ThreadModel(String photoURI, String last_message, String full_name, Date timestamp, List<String> members) {
         this.photoURI = photoURI;
         this.last_message = last_message;
         this.full_name = full_name;
         this.timestamp = timestamp;
+        this.members = members;
     }
 
     public String getPhotoURI() {
