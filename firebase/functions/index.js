@@ -2,6 +2,7 @@
 
 const functions = require("firebase-functions");
 const nodemailer = require("nodemailer");
+const db = admin.firestore();
 
 const admin = require('firebase-admin');
 const { firebaseConfig } = require("firebase-functions");
@@ -43,17 +44,17 @@ const actionCodeSettings = {
 exports.disableUser = functions.auth.user().onCreate((user) => {
     // Email of the user
     const uid = user.uid;
-    
-    if (user.email.endsWith("outlook.com")){
+
+    if (user.email.endsWith("outlook.com")) {
         admin.auth().updateUser(uid, {
             disabled: true
         })
-        .then((user) => {
-            functions.logger.log('Disable user account', user.email);
-        })
-        .catch((error) => {
-            functions.logger.log('Error disabling user', error);
-        })
+            .then((user) => {
+                functions.logger.log('Disable user account', user.email);
+            })
+            .catch((error) => {
+                functions.logger.log('Error disabling user', error);
+            })
     }
     return null;
 
@@ -65,7 +66,7 @@ exports.verifyUser = functions.auth.user().onCreate(user => {
     // Email of the user
     const email = user.email;
     const displayName = user.displayName;
-    
+
     admin.auth().generateEmailVerificationLink(email, actionCodeSettings)
         .then((link) => {
             return sendVerificationEmail(email, displayName, link);
@@ -117,3 +118,24 @@ async function sendVerificationEmail(email, displayName, link) {
 
 
 
+exports.createMatches = functions.firestore.document('users/{userID}').onWrite((change, context) > {
+
+    // Generate 10 specific matches
+    // Write the matches' user ids in the user array "matches"
+
+})
+
+const getUsers = () => {
+    return db.collection('users').get().then(
+        querySnapshot => {
+            const users = [];
+            querySnapshot.forEach(doc => {
+                users.push({
+                    ...doc.data(),
+                    id: doc.id,
+                    ref: doc.ref
+                });
+            });
+            return users;
+        });
+};

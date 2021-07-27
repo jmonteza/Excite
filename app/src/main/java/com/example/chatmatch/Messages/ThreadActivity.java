@@ -61,7 +61,7 @@ public class ThreadActivity extends AppCompatActivity{
 
     private void setUpRecyclerView(){
         //
-        query = threadRef.whereArrayContains("members", "ax1").orderBy("timestamp", Query.Direction.DESCENDING);
+        query = threadRef.orderBy("timestamp", Query.Direction.DESCENDING);
         // query = threadRef.orderBy("timestamp", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<ThreadModel> options = new FirestoreRecyclerOptions.Builder<ThreadModel>()
                 .setQuery(query,ThreadModel.class).build();
@@ -140,7 +140,7 @@ public class ThreadActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        // adapter.startListening();
+        adapter.startListening();
         // query = threadRef.whereArrayContains("members", "ax1").orderBy("timestamp", Query.Direction.DESCENDING);
         // FirestoreRecyclerOptions<ThreadModel> options = new FirestoreRecyclerOptions.Builder<ThreadModel>()
         //         .setQuery(query,ThreadModel.class).build();
