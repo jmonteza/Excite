@@ -33,6 +33,7 @@
         <activity android:name=".startup_page.onboard_page2"></activity>
         <activity android:name=".startup_page.onboard_page1"/>
         <activity android:name=".Authentication.phoneNumVerification"/>
+
         <activity android:name=".Discover.discover"/>
         <activity android:name=".Authentication.EmailSign_up"/>
         <activity android:name=".Messages.ThreadActivity"/>

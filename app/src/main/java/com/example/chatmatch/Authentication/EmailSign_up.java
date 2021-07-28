@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.chatmatch.Database.LocalUser;
 import com.example.chatmatch.Discover.discover;
+import com.example.chatmatch.Discovery.discovery;
 import com.example.chatmatch.R;
 import com.example.chatmatch.startup_page.onboard_page1;
 import com.example.chatmatch.startup_page.startup_page;
