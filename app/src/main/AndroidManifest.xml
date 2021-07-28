@@ -5,7 +5,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,30 +16,27 @@
         android:theme="@style/AppTheme.Fullscreen">
 
 
-
-
-
         <!--        <activity android:name=".Authentication.EmailVerification" />-->
 
-<!--        <activity android:name=".Authentication.AuthActivity" />-->
-<!--        <activity android:name=".Authentication.OnboardingActivity" /> &lt;!&ndash; <activity android:name=".User.ProfilePhotoActivity"/> &ndash;&gt;-->
+        <!--        <activity android:name=".Authentication.AuthActivity" />-->
+        <!--        <activity android:name=".Authentication.OnboardingActivity" /> &lt;!&ndash; <activity android:name=".User.ProfilePhotoActivity"/> &ndash;&gt;-->
         <!-- <activity android:name=".User.UserProfile"/> -->
         <!-- <activity android:name=".Authentication.AuthContainer"/> -->
-         <activity android:name=".User.ProfilePhotoActivity"/>
+        <activity android:name=".User.ProfilePhotoActivity" />
         <activity android:name=".Messages.messageActivity" />
         <activity android:name=".Matches.matches" />
 
-        <activity android:name=".startup_page.onboard_page4_pulse"></activity>
-        <activity android:name=".startup_page.onboard_page3"></activity>
-        <activity android:name=".startup_page.onboard_page2"></activity>
-        <activity android:name=".startup_page.onboard_page1"/>
-        <activity android:name=".Authentication.phoneNumVerification"/>
-
-        <activity android:name=".Discover.discover"/>
-        <activity android:name=".Authentication.EmailSign_up"/>
-        <activity android:name=".Messages.ThreadActivity"/>
-        <activity android:name=".Messages.ChatActivity"/>
-            <activity android:name = ".startup_page.startup_page">
+        <activity android:name=".startup_page.onboard_page4_pulse" />
+        <activity android:name=".startup_page.onboard_page3" />
+        <activity android:name=".startup_page.onboard_page2" />
+        <activity android:name=".startup_page.onboard_page1" />
+        <activity android:name=".Authentication.phoneNumVerification" />
+        <activity android:name=".Discovery.Discovery"/>
+        <activity android:name=".Discover.discover" />
+        <activity android:name=".Authentication.EmailSign_up" />
+        <activity android:name=".Messages.ThreadActivity" />
+        <activity android:name=".Messages.ChatActivity" />
+        <activity android:name=".startup_page.startup_page">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import com.example.chatmatch.Discover.discover;
-import com.example.chatmatch.Discovery.discovery;
 import com.example.chatmatch.Matches.matches;
 import com.example.chatmatch.Messages.messageActivity;
 import com.example.chatmatch.R;

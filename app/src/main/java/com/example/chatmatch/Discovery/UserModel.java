@@ -1,16 +1,16 @@
 package com.example.chatmatch.Discovery;
 
-public class testUSer {
+public class UserModel {
 
     private String firstName;
 
-    public testUSer(){
+    public UserModel(){
 
     }
 
 
 
-    public testUSer(String firstName){
+    public UserModel(String firstName){
         this.firstName = firstName;
     }
 

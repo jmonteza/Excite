@@ -3,12 +3,10 @@ package com.example.chatmatch.Authentication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -18,9 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.chatmatch.Database.LocalUser;
 import com.example.chatmatch.Discover.discover;
-import com.example.chatmatch.Discovery.discovery;
 import com.example.chatmatch.R;
 import com.example.chatmatch.startup_page.onboard_page1;
 import com.example.chatmatch.startup_page.startup_page;
