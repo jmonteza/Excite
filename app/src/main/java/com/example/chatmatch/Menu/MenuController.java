@@ -8,12 +8,13 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 
-import com.example.chatmatch.Discover.discover;
+import com.example.chatmatch.Discovery.Discovery;
 import com.example.chatmatch.Matches.matches;
 import com.example.chatmatch.Messages.messageActivity;
 import com.example.chatmatch.R;
 import com.example.chatmatch.User.ProfilePhotoActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 public class MenuController implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,35 +41,60 @@ public class MenuController implements NavigationView.OnNavigationItemSelectedLi
     public void useMenu(){
 
         bottomNavigationView.setSelectedItemId(id);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.discovery:
-                        intent = new Intent(context, matches.class);
-                        context.startActivity(intent);
-                        ((Activity)context).finish();
-                        return true;
-                    case R.id.messaging:
-                        intent = new Intent(context, messageActivity.class);
-                        context.startActivity(intent);
-                        ((Activity)context).finish();
-                        return true;
-                    case R.id.connect:
-                        intent = new Intent(context, discover.class);
-                        context.startActivity(intent);
-                        ((Activity)context).finish();
-                        return true;
-                    case R.id.userprofile:
-                        intent = new Intent(context, ProfilePhotoActivity.class);
-                        context.startActivity(intent);
-                        ((Activity)context).finish();
-                        return true;
 
+                int id = item.getItemId();
+
+                if (id == R.id.discovery){
+                    intent = new Intent(context, matches.class);
+                    context.startActivity(intent);
+                    ((Activity)context).finish();
+                    return true;
+                } else if (id == R.id.messaging) {
+                    intent = new Intent(context, messageActivity.class);
+                    context.startActivity(intent);
+                    ((Activity)context).finish();
+                    return true;
+                } else if (id == R.id.connect){
+                    intent = new Intent(context, Discovery.class);
+                    context.startActivity(intent);
+                    ((Activity)context).finish();
+                    return true;
+                } else if (id == R.id.userprofile){
+                    intent = new Intent(context, ProfilePhotoActivity.class);
+                    context.startActivity(intent);
+                    ((Activity)context).finish();
+                    return true;
+                } else {
+                    return false;
                 }
 
-
-                return false;
+                // switch(item.getItemId()){
+                //     case R.id.discovery:
+                //         intent = new Intent(context, matches.class);
+                //         context.startActivity(intent);
+                //         ((Activity)context).finish();
+                //         return true;
+                //     case R.id.messaging:
+                //         intent = new Intent(context, messageActivity.class);
+                //         context.startActivity(intent);
+                //         ((Activity)context).finish();
+                //         return true;
+                //     case R.id.connect:
+                //         intent = new Intent(context, Discovery.class);
+                //         context.startActivity(intent);
+                //         ((Activity)context).finish();
+                //         return true;
+                //     case R.id.userprofile:
+                //         intent = new Intent(context, ProfilePhotoActivity.class);
+                //         context.startActivity(intent);
+                //         ((Activity)context).finish();
+                //         return true;
+                //
+                // }
+                // return false;
             }
 
 

@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chatmatch.Menu.MenuController;
 import com.example.chatmatch.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -16,6 +18,8 @@ public class Discovery extends AppCompatActivity {
     private FirebaseFirestore db;
     private DiscoveryAdapter adapter;
     private RecyclerView discoveryRecyclerView;
+    private MenuController menuController;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +27,15 @@ public class Discovery extends AppCompatActivity {
         setContentView(R.layout.activity_discover);
 
         db = FirebaseFirestore.getInstance();
+        int id = R.id.connect;
+        bottomNavigationView = findViewById(R.id.bottomNav);
+        menuController = new MenuController(this, bottomNavigationView, id);
+        menuController.useMenu();
+
 
         setUpRecyclerView();
     }
+
 
     private void setUpRecyclerView() {
         //Query
