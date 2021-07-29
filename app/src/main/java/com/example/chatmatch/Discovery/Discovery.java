@@ -48,7 +48,7 @@ public class Discovery extends AppCompatActivity {
 
         adapter = new DiscoveryAdapter(options);
         discoveryRecyclerView = findViewById(R.id.recycler_view);
-        discoveryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        discoveryRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         discoveryRecyclerView.setAdapter(adapter);
 
     }
