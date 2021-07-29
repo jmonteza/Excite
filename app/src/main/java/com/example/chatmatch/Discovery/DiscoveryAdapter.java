@@ -3,11 +3,13 @@ package com.example.chatmatch.Discovery;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.chatmatch.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -24,6 +26,7 @@ public class DiscoveryAdapter extends FirestoreRecyclerAdapter<UserModel, Discov
     @Override
     protected void onBindViewHolder(@NonNull @NotNull DiscoveryAdapter.DiscoveryHolder holder, int position, @NonNull @NotNull UserModel model) {
         holder.userName.setText(model.getFirstName());
+        Glide.with(holder.itemView.getContext()).load(model.getPhotoURI()).into(holder.userDisplay);
     }
 
     @NonNull
@@ -37,9 +40,13 @@ public class DiscoveryAdapter extends FirestoreRecyclerAdapter<UserModel, Discov
 
     static class DiscoveryHolder extends RecyclerView.ViewHolder{
         private final TextView userName;
+        private ImageView userDisplay;
         public DiscoveryHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             userName = itemView.findViewById(R.id.usrCardname);
+            userDisplay = itemView.findViewById(R.id.icon);
         }
     }
+
+
 }

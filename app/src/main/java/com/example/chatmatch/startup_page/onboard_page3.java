@@ -22,6 +22,9 @@ import com.example.chatmatch.User.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -29,6 +32,9 @@ import com.google.firebase.storage.UploadTask;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -42,11 +48,14 @@ public class onboard_page3 extends AppCompatActivity {
     Uri imageUri;
     ImageButton getPhoto;
 
+    SharedPreferences sp1;
 
     SharedPreferences sp;
 
     String userId;
     SharedPreferences sp3;
+    private static final ExecutorService threadpool = Executors.newFixedThreadPool(3);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +101,7 @@ public class onboard_page3 extends AppCompatActivity {
 //            Log.d("last array values", Output.get(i));
 //        }
 
+        sp1 = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
         navigateBtn.setOnClickListener(
                 new View.OnClickListener()
                 {
@@ -100,6 +110,11 @@ public class onboard_page3 extends AppCompatActivity {
 
 
                         uploadImage();
+
+
+                        sp1 = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
+                        String uri = sp1.getString("uri", "-1");
+                        Log.d("uri value", uri);
                         Intent intent = new Intent(onboard_page3.this, onboard_page4_pulse.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -124,6 +139,8 @@ public class onboard_page3 extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference().child("images").child("profile")
                 .child(userId + ".jpeg");
 
+
+
         storageReference.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -139,6 +156,19 @@ public class onboard_page3 extends AppCompatActivity {
 //                Toast.makeText(onboard_page3.this, "failure", Toast.LENGTH_SHORT).show();
             }
         });
+
+        getDownloadUrl(storageReference, new urlCallback(){
+
+            @Override
+            public void onCallback(String value) {
+                SharedPreferences.Editor editor = sp1.edit();
+                Log.d("value", value);
+                editor.putString("uri", value);
+                editor.apply();
+            }
+
+
+        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
@@ -149,6 +179,43 @@ public class onboard_page3 extends AppCompatActivity {
             imageUri = data.getData();
             display_picture.setImageURI(imageUri);
 
+        }
+    }
+
+
+    private void getDownloadUrl(StorageReference reference,urlCallback urlCallback){
+        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Log.d("TAG","onSuccess: " + uri);
+
+
+
+                urlCallback.onCallback(uri.toString());
+                Toast.makeText(onboard_page3.this, uri.toString(), Toast.LENGTH_SHORT).show();
+                setUserProfilePictureUrl(uri);
+            }
+        });
+    }
+
+    private void setUserProfilePictureUrl(Uri uri){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        UserProfileChangeRequest request = new UserProfileChangeRequest.Builder().setPhotoUri(uri).build();
+
+        if (user != null) {
+            user.updateProfile(request)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(onboard_page3.this, "Picture updated successfully.", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull @NotNull Exception e) {
+                            Toast.makeText(onboard_page3.this, "Picture update failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
     }
 

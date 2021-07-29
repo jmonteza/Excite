@@ -39,7 +39,7 @@ public class Discovery extends AppCompatActivity {
 
     private void setUpRecyclerView() {
         //Query
-        Query query = db.collection("test");
+        Query query = db.collection("userProfile");
 
         //Recycler options
         FirestoreRecyclerOptions<UserModel> options = new FirestoreRecyclerOptions.Builder<UserModel>()

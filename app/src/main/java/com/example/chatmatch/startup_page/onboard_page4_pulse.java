@@ -30,6 +30,7 @@ public class onboard_page4_pulse extends AppCompatActivity {
 
 
     SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,8 @@ public class onboard_page4_pulse extends AppCompatActivity {
         LocalUser localUser = new LocalUser();
         sp = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
 
+
+        String uri = sp.getString("uri", "-1");
         String email = sp.getString("email", "-1");
         String password = sp.getString("password", "-1");
         String firstName = sp.getString("firstName", "-1");
@@ -44,6 +47,7 @@ public class onboard_page4_pulse extends AppCompatActivity {
         String selectedGender = sp.getString("selectedGender", "-1");
         String selectedInterest = sp.getString("selectedInterest", "-1");
 
+        Log.d("uri test", uri);
 
         LocalUser lu = LocalUser.getInstance();
         lu.setContext(getApplicationContext());
@@ -61,7 +65,7 @@ public class onboard_page4_pulse extends AppCompatActivity {
                 try{
                     synchronized (this){
                         //wait for 3 seconds before proceeding
-                        lu.saveLocalData(email, password, birthDay,firstName, selectedGender, selectedInterest);
+                        lu.saveLocalData(uri, email, password, birthDay,firstName, selectedGender, selectedInterest);
                         wait(3000);
                     }
                 } catch(InterruptedException e){

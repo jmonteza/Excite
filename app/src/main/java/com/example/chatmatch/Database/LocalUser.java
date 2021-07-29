@@ -49,7 +49,7 @@ public class LocalUser {
     }
 
 
-    public void saveLocalData(String email, String password, String birthDay, String firstName, String gender, String interest_1){
+    public void saveLocalData(String uri, String email, String password, String birthDay, String firstName, String gender, String interest_1){
         fireStoreController = new FirestoreController();
 
         if (applicationContext == null){
@@ -65,6 +65,7 @@ public class LocalUser {
         edit.putString("firstName", firstName);
         edit.putString("gender", gender);
         edit.putString("interest", interest_1);
+        edit.putString("uri", uri);
         //no boolean returned - applied asynchronously
 
 
@@ -79,7 +80,7 @@ public class LocalUser {
         //TODO: will need to delegate uploading user data to another class
 
         //creating new user
-        User user = new User(userId, email, password, birthDay, firstName, gender, interest_1);
+        User user = new User(uri, userId, email, password, birthDay, firstName, gender, interest_1);
         user.setUserId(userId);
         DatabaseAdapter dbAdapter;
         dbAdapter = new FirestoreAdapter();

@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.chatmatch.Discover.discover;
+import com.example.chatmatch.Discovery.Discovery;
 import com.example.chatmatch.R;
 import com.example.chatmatch.startup_page.onboard_page1;
 import com.example.chatmatch.startup_page.startup_page;
@@ -69,7 +70,7 @@ public class EmailSign_up extends AppCompatActivity {
         String remembered = preferences.getString("remember", "");
 
         if (remembered.equals("true")){
-            Intent intent = new Intent(EmailSign_up.this, discover.class);
+            Intent intent = new Intent(EmailSign_up.this, Discovery.class);
             startActivity(intent);
         }
         else if (remembered.equals("false")){
