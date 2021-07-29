@@ -1,10 +1,6 @@
 package com.example.chatmatch.startup_page;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,13 +13,22 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
 import com.example.chatmatch.R;
-import com.example.chatmatch.User.User;
+import com.example.chatmatch.Util.FirebaseUtil;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class onboard_page1 extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -36,16 +41,17 @@ public class onboard_page1 extends AppCompatActivity implements DatePickerDialog
 
     private String bday;
     private ArrayList<String> Output;
+    private final String TAG = "Onboard Page 1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onboarding_screen1);
 
-        Output = new ArrayList<>();
+        // Output = new ArrayList<>();
 
-        sp1 = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
+        // sp1 = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
 
-        SharedPreferences.Editor editor = sp1.edit();
+        // SharedPreferences.Editor editor = sp1.edit();
 
         bdayBtn = findViewById(R.id.birthdayPicker);
         navigateBtn = findViewById(R.id.testCore);
@@ -53,8 +59,8 @@ public class onboard_page1 extends AppCompatActivity implements DatePickerDialog
         FirstName = (EditText)findViewById(R.id.firstName);
         bdayPicker = findViewById(R.id.birthdayPicker);
 
-        Bundle bundle = getIntent().getExtras();
-        Output = bundle.getStringArrayList("userDetails");
+        // Bundle bundle = getIntent().getExtras();
+        // Output = bundle.getStringArrayList("userDetails");
         
         
 //        for (int i = 0; i < Output.size (); i++)
@@ -90,15 +96,36 @@ public class onboard_page1 extends AppCompatActivity implements DatePickerDialog
                             Intent intent = new Intent(onboard_page1.this, onboard_page2.class);
                             String fName = FirstName.getText().toString().trim();
 
-                            Output.add(fName);
-                            Output.add(bday);
-
-                            editor.putString("firstName", fName);
-                            editor.putString("birthDay", bday);
-                            editor.apply();
+                            Map<String, Object> data = new HashMap<>();
+                            data.put("firstName", fName);
+                            data.put("birthday", bday);
 
 
-                            intent.putStringArrayListExtra("userDetails", Output);
+                            String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                            FirebaseUtil.getFirestore().collection("userProfile").document(id).set(data)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Log.d(TAG, "First Name and Birthday Added");
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "First Name and Birthday Upload Failed");
+                                        }
+                                    });
+
+                            // Output.add(fName);
+                            // Output.add(bday);
+
+                            // editor.putString("firstName", fName);
+                            // editor.putString("birthDay", bday);
+                            // editor.apply();
+
+
+                            // intent.putStringArrayListExtra("userDetails", Output);
                             startActivity(intent);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         }

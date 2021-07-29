@@ -1,9 +1,5 @@
 package com.example.chatmatch.startup_page;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,13 +11,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.chatmatch.Database.LocalUser;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.chatmatch.R;
-import com.example.chatmatch.User.ProfilePhotoActivity;
-import com.example.chatmatch.User.User;
+import com.example.chatmatch.Util.FirebaseUtil;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -32,9 +29,9 @@ import com.google.firebase.storage.UploadTask;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -54,7 +51,9 @@ public class onboard_page3 extends AppCompatActivity {
 
     String userId;
     SharedPreferences sp3;
-    private static final ExecutorService threadpool = Executors.newFixedThreadPool(3);
+    // private static final ExecutorService threadpool = Executors.newFixedThreadPool(3);
+
+    private final String TAG = "Onboard Page 3";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +64,7 @@ public class onboard_page3 extends AppCompatActivity {
 
         getPhoto = findViewById(R.id.get_img);
 
-        sp = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
-
+        // sp = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
 
 
         getPhoto.setOnClickListener(new View.OnClickListener() {
@@ -77,23 +75,18 @@ public class onboard_page3 extends AppCompatActivity {
         });
 
 
+        // sp3 = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
+
+        // String test = sp3.getString("selectedGender", "-1");
+
+        // Log.d("test value: ", test+"");
 
 
-
-
-        sp3 = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
-
-        String test = sp3.getString("selectedGender", "-1");
-
-        Log.d("test value: ", test+"");
-
-
-
-        Output = new ArrayList<>();
+        // Output = new ArrayList<>();
         navigateBtn = findViewById(R.id.testCore);
 
-        Bundle bundle = getIntent().getExtras();
-        Output = bundle.getStringArrayList("userDetails");
+        // Bundle bundle = getIntent().getExtras();
+        // Output = bundle.getStringArrayList("userDetails");
 
 
 //        for (int i = 0; i < Output.size(); i++)
@@ -103,18 +96,35 @@ public class onboard_page3 extends AppCompatActivity {
 
         sp1 = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
         navigateBtn.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
+                new View.OnClickListener() {
+                    public void onClick(View view) {
 
 
                         uploadImage();
 
+                        String url = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString();
+                        String id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                        // sp1 = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
+                        // String uri = sp1.getString("uri", "-1");
+                        // Log.d("uri value", uri);
 
-                        sp1 = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
-                        String uri = sp1.getString("uri", "-1");
-                        Log.d("uri value", uri);
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("photoURL", url);
+
+                        FirebaseUtil.getFirestore().collection("userProfile").document(id).update(data)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.d(TAG, "PhotoURL Added");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "PhotoURL Upload Failed");
+                                    }
+                                });
+
                         Intent intent = new Intent(onboard_page3.this, onboard_page4_pulse.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -124,7 +134,7 @@ public class onboard_page3 extends AppCompatActivity {
 
     }
 
-    private void pickImage(){
+    private void pickImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -132,13 +142,12 @@ public class onboard_page3 extends AppCompatActivity {
     }
 
 
-    public void uploadImage(){
+    public void uploadImage() {
 
         sp = getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE);
         userId = sp.getString("userId", "-1");
         storageReference = FirebaseStorage.getInstance().getReference().child("images").child("profile")
                 .child(userId + ".jpeg");
-
 
 
         storageReference.putFile(imageUri)
@@ -157,7 +166,7 @@ public class onboard_page3 extends AppCompatActivity {
             }
         });
 
-        getDownloadUrl(storageReference, new urlCallback(){
+        getDownloadUrl(storageReference, new urlCallback() {
 
             @Override
             public void onCallback(String value) {
@@ -170,11 +179,12 @@ public class onboard_page3 extends AppCompatActivity {
 
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 100 && data != null && data.getData() != null){
+        if (requestCode == 100 && data != null && data.getData() != null) {
 
             imageUri = data.getData();
             display_picture.setImageURI(imageUri);
@@ -183,12 +193,11 @@ public class onboard_page3 extends AppCompatActivity {
     }
 
 
-    private void getDownloadUrl(StorageReference reference,urlCallback urlCallback){
+    private void getDownloadUrl(StorageReference reference, urlCallback urlCallback) {
         reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Log.d("TAG","onSuccess: " + uri);
-
+                Log.d("TAG", "onSuccess: " + uri);
 
 
                 urlCallback.onCallback(uri.toString());
@@ -198,7 +207,7 @@ public class onboard_page3 extends AppCompatActivity {
         });
     }
 
-    private void setUserProfilePictureUrl(Uri uri){
+    private void setUserProfilePictureUrl(Uri uri) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         UserProfileChangeRequest request = new UserProfileChangeRequest.Builder().setPhotoUri(uri).build();
 
@@ -220,7 +229,7 @@ public class onboard_page3 extends AppCompatActivity {
     }
 
     @Override
-    public void finish(){
+    public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }

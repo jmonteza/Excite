@@ -1,8 +1,5 @@
 package com.example.chatmatch.Authentication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,9 +13,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.chatmatch.Discover.discover;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.chatmatch.Discovery.Discovery;
 import com.example.chatmatch.R;
+import com.example.chatmatch.Util.FirebaseUtil;
 import com.example.chatmatch.startup_page.onboard_page1;
 import com.example.chatmatch.startup_page.startup_page;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,10 +26,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FieldValue;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EmailSign_up extends AppCompatActivity {
 
@@ -41,6 +44,7 @@ public class EmailSign_up extends AppCompatActivity {
     private Button sign_up_btn;
     private ImageButton login_redirect_btn;
     private ArrayList<String> curr_lst;
+    private final String TAG = "Email Signup";
     SharedPreferences sp;
 
     @Override
@@ -48,11 +52,7 @@ public class EmailSign_up extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.email_sign_up);
 
-
         sp = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
-
-
-
 
         mAuth = FirebaseAuth.getInstance();
         email_signup_et = findViewById(R.id.email_signup_editText);
@@ -95,23 +95,25 @@ public class EmailSign_up extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            curr_lst = new ArrayList<>();
+                            // curr_lst = new ArrayList<>();
 
                             currentUser = mAuth.getCurrentUser();
                             if (currentUser != null) {
-                                curr_lst.add(email);
-                                curr_lst.add(password);
+                                // curr_lst.add(email);
+                                // curr_lst.add(password);
 
-                                SharedPreferences preferences = getSharedPreferences("remember_user", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("remember", "true");
-                                editor.apply();
+                                // SharedPreferences preferences = getSharedPreferences("remember_user", MODE_PRIVATE);
+                                // SharedPreferences.Editor editor = preferences.edit();
+                                // editor.putString("remember", "true");
+                                // editor.apply();
+                                String id = currentUser.getUid();
 
-
-
+                                Map<String, Object> data = new HashMap<>();
+                                data.put("created", FieldValue.serverTimestamp());
+                                FirebaseUtil.uploadUserData(id, data, TAG);
 
                                 Intent intent = new Intent(EmailSign_up.this, onboard_page1.class);
-                                intent.putStringArrayListExtra("userDetails",  curr_lst);
+                                // intent.putStringArrayListExtra("userDetails",  curr_lst);
                                 startActivity(intent);
                             }
                         } else {
@@ -128,11 +130,11 @@ public class EmailSign_up extends AppCompatActivity {
         String password = password_signup_et.getText().toString().trim();
         String verify_password = verify_password_signup_et.getText().toString().trim();
 
-        SharedPreferences.Editor editor = sp.edit();
-
-        editor.putString("email", email);
-        editor.putString("password", password);
-        editor.apply();
+        // SharedPreferences.Editor editor = sp.edit();
+        //
+        // editor.putString("email", email);
+        // editor.putString("password", password);
+        // editor.apply();
 
 //        LocalUser.saveLocalData(email, password);
 //        Toast.makeText(EmailSign_up.this, "info saved", Toast.LENGTH_LONG).show();

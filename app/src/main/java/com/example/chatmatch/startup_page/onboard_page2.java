@@ -1,25 +1,28 @@
 package com.example.chatmatch.startup_page;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.chatmatch.R;
-import com.google.android.material.button.MaterialButton;
+import com.example.chatmatch.Util.FirebaseUtil;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class onboard_page2 extends AppCompatActivity {
 
@@ -32,6 +35,7 @@ public class onboard_page2 extends AppCompatActivity {
 
     private String selected_gender;
     private String selected_interest;
+    private final String TAG = "Onboard Page 2";
 
     SharedPreferences sp2;
     @Override
@@ -39,15 +43,15 @@ public class onboard_page2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onboarding_screen2);
 
-        Output = new ArrayList<>();
-        Bundle bundle = getIntent().getExtras();
-        Output = bundle.getStringArrayList("userDetails");
+        // Output = new ArrayList<>();
+        // Bundle bundle = getIntent().getExtras();
+        // Output = bundle.getStringArrayList("userDetails");
         radioGenderGroup = findViewById(R.id.RadiogrpGender);
         radioInterestGroup = findViewById(R.id.RadioGroupInterest);
 
-        sp2 = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
+        // sp2 = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
 
-        SharedPreferences.Editor editor = sp2.edit();
+        // SharedPreferences.Editor editor = sp2.edit();
 
         navigateBtn = findViewById(R.id.testCore);
 
@@ -65,19 +69,40 @@ public class onboard_page2 extends AppCompatActivity {
                     }
                     else{
                         Log.d("selected gender", selected_gender+"");
-                        Output.add(selected_gender);
-                        Output.add(selected_interest);
+                        // Output.add(selected_gender);
+                        // Output.add(selected_interest);
 
-                        editor.putString("selectedGender", selected_gender);
-                        editor.putString("selectedInterest", selected_interest);
-                        editor.apply();
+                        // editor.putString("selectedGender", selected_gender);
+                        // editor.putString("selectedInterest", selected_interest);
+                        // editor.apply();
 //                        for (int i = 0; i < Output.size(); i++)
 //                        {
 //                            Log.d("array values", Output.get(i));
 //                        }
+
+                        String id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("gender", selected_gender);
+                        data.put("interest", selected_interest);
+
+                        FirebaseUtil.getFirestore().collection("userProfile").document(id).update(data)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.d(TAG, "Gender and Interest Added");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Gender and Interest Upload Failed");
+                                    }
+                                });
+
                         navigateBtn.setEnabled(true);
                         Intent intent = new Intent(onboard_page2.this, onboard_page3.class);
-                        intent.putStringArrayListExtra("userDetails", Output);
+                        // intent.putStringArrayListExtra("userDetails", Output);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
