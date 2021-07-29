@@ -14,7 +14,7 @@ public class MatchFUIAdapter extends FirestoreRecyclerAdapter<MatchModel, MatchF
     protected void onBindViewHolder(@NonNull @NotNull MatchFUIAdapter.MatchHolder holder, int position, @NonNull @NotNull MatchModel model) {
 
     }
-    
+
     @NonNull
     @NotNull
     @Override
