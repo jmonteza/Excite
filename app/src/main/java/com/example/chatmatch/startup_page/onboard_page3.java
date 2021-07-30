@@ -1,6 +1,5 @@
 package com.example.chatmatch.startup_page;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -94,7 +93,7 @@ public class onboard_page3 extends AppCompatActivity {
 //            Log.d("last array values", Output.get(i));
 //        }
 
-        sp1 = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
+        // sp1 = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
         navigateBtn.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
@@ -144,10 +143,13 @@ public class onboard_page3 extends AppCompatActivity {
 
     public void uploadImage() {
 
-        sp = getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE);
-        userId = sp.getString("userId", "-1");
+        // sp = getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE);
+        // userId = sp.getString("userId", "-1");
+
+        String id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
         storageReference = FirebaseStorage.getInstance().getReference().child("images").child("profile")
-                .child(userId + ".jpeg");
+                .child(id + ".jpeg");
 
 
         storageReference.putFile(imageUri)
@@ -170,10 +172,11 @@ public class onboard_page3 extends AppCompatActivity {
 
             @Override
             public void onCallback(String value) {
-                SharedPreferences.Editor editor = sp1.edit();
-                Log.d("value", value);
-                editor.putString("uri", value);
-                editor.apply();
+                // SharedPreferences.Editor editor = sp1.edit();
+                // Log.d("value", value);
+                // editor.putString("uri", value);
+                // editor.apply();
+
             }
 
 
