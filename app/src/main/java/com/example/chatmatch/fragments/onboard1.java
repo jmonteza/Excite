@@ -11,10 +11,8 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.chatmatch.R;
-import com.example.chatmatch.swipeDiabledViewPager;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +37,7 @@ public class onboard1 extends Fragment {
         frstName = rootView.findViewById(R.id.firstName);
         String password = frstName.getText().toString().trim();
 
-        testbtn = rootView.findViewById(R.id.testCore);
+        testbtn = rootView.findViewById(R.id.uploadDoneBtn);
 
         testbtn.setOnClickListener(new View.OnClickListener() {
             @Override

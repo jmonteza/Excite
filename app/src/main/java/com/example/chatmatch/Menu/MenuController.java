@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import com.example.chatmatch.Discovery.Discovery;
-import com.example.chatmatch.Matches.matches;
+import com.example.chatmatch.Matches.MatchesActivity;
 import com.example.chatmatch.Messages.messageActivity;
 import com.example.chatmatch.R;
 import com.example.chatmatch.User.ProfilePhotoActivity;
@@ -48,7 +48,7 @@ public class MenuController implements NavigationView.OnNavigationItemSelectedLi
                 int id = item.getItemId();
 
                 if (id == R.id.discovery){
-                    intent = new Intent(context, matches.class);
+                    intent = new Intent(context, MatchesActivity.class);
                     context.startActivity(intent);
                     ((Activity)context).finish();
                     return true;

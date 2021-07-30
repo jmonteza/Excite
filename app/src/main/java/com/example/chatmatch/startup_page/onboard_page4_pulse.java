@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chatmatch.Discover.discover;
+import com.example.chatmatch.Discovery.Discovery;
 import com.example.chatmatch.R;
 
 public class onboard_page4_pulse extends AppCompatActivity {
@@ -55,7 +55,7 @@ public class onboard_page4_pulse extends AppCompatActivity {
                     e.printStackTrace();
                 } finally {
                     //launch new activity / page after splash screen
-                    Intent intent = new Intent(onboard_page4_pulse.this, discover.class);
+                    Intent intent = new Intent(onboard_page4_pulse.this, Discovery.class);
                     startActivity(intent);
                     finish();
                 }

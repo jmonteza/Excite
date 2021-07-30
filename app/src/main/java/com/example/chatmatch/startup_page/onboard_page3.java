@@ -82,7 +82,7 @@ public class onboard_page3 extends AppCompatActivity {
 
 
         // Output = new ArrayList<>();
-        navigateBtn = findViewById(R.id.testCore);
+        navigateBtn = findViewById(R.id.uploadDoneBtn);
 
         // Bundle bundle = getIntent().getExtras();
         // Output = bundle.getStringArrayList("userDetails");

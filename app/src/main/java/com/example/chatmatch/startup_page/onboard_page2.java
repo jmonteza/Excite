@@ -53,7 +53,7 @@ public class onboard_page2 extends AppCompatActivity {
 
         // SharedPreferences.Editor editor = sp2.edit();
 
-        navigateBtn = findViewById(R.id.testCore);
+        navigateBtn = findViewById(R.id.uploadDoneBtn);
 
 //        navigateBtn.setEnabled(false);
 
@@ -101,7 +101,7 @@ public class onboard_page2 extends AppCompatActivity {
                                 });
 
                         navigateBtn.setEnabled(true);
-                        Intent intent = new Intent(onboard_page2.this, onboard_page3.class);
+                        Intent intent = new Intent(onboard_page2.this, onboard_page3v2.class);
                         // intent.putStringArrayListExtra("userDetails", Output);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

@@ -54,7 +54,7 @@ public class onboard_page1 extends AppCompatActivity implements DatePickerDialog
         // SharedPreferences.Editor editor = sp1.edit();
 
         bdayBtn = findViewById(R.id.birthdayPicker);
-        navigateBtn = findViewById(R.id.testCore);
+        navigateBtn = findViewById(R.id.uploadDoneBtn);
 
         FirstName = (EditText)findViewById(R.id.firstName);
         bdayPicker = findViewById(R.id.birthdayPicker);

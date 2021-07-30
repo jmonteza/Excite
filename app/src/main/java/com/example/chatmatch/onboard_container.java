@@ -4,17 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.chatmatch.fragments.onboard1;
 import com.example.chatmatch.fragments.onboard2;
@@ -46,7 +42,7 @@ public class onboard_container extends AppCompatActivity {
 
 //        String password = test.getText().toString().trim();
 //        Log.d("correct", password.toString());
-        testbtn = regisText.findViewById(R.id.testCore);
+        testbtn = regisText.findViewById(R.id.uploadDoneBtn);
 
         testbtn.setOnClickListener(new View.OnClickListener() {
             @Override

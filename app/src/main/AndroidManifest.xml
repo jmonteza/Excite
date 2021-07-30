@@ -37,6 +37,7 @@
         <activity android:name=".Messages.ThreadActivity" />
         <activity android:name=".Messages.ChatActivity" />
         <activity android:name=".Matches.MatchesActivity"/>
+        <activity android:name=".startup_page.onboard_page3v2"/>
         <activity android:name=".startup_page.startup_page">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
