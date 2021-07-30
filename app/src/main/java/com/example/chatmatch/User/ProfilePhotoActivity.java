@@ -59,6 +59,9 @@ public class ProfilePhotoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_personal_profile);
         profile_photo_iv = findViewById(R.id.profile_picture_imageView);
 
+        String photoURL = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString();
+        Glide.with(this).load(photoURL).into(profile_photo_iv);
+
         displayName = findViewById(R.id.userName);
         displayName.setText(FirebaseUtil.getAuth().getCurrentUser().getDisplayName());
 

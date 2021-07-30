@@ -2,6 +2,7 @@ package com.example.chatmatch.Matches;
 
 public class MatchModel {
     private String firstName;
+    private String photoURL;
 
     public MatchModel(){
 

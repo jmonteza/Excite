@@ -43,7 +43,7 @@ public class MatchesActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-        Query query = db.collection("matches");
+        Query query = db.collection("userProfile");
 
         FirestoreRecyclerOptions<MatchModel> options = new FirestoreRecyclerOptions.Builder<MatchModel>()
                 .setQuery(query, MatchModel.class).build();
