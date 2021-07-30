@@ -7,9 +7,10 @@
     tools:context=".Discover.discover"
     android:orientation="vertical"
     >
-    <include layout = "@layout/tool_bar"
+
+    <include
         android:id="@+id/toolbar"
-        />
+        layout="@layout/tool_bar" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="wrap_content"

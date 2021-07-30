@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 
 import com.example.chatmatch.Discovery.Discovery;
 import com.example.chatmatch.Matches.MatchesActivity;
-import com.example.chatmatch.Messages.messageActivity;
+import com.example.chatmatch.Messages.ThreadActivity;
 import com.example.chatmatch.R;
 import com.example.chatmatch.User.ProfilePhotoActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -53,7 +53,7 @@ public class MenuController implements NavigationView.OnNavigationItemSelectedLi
                     ((Activity)context).finish();
                     return true;
                 } else if (id == R.id.messaging) {
-                    intent = new Intent(context, messageActivity.class);
+                    intent = new Intent(context, ThreadActivity.class);
                     context.startActivity(intent);
                     ((Activity)context).finish();
                     return true;

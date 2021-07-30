@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKey;
 
+import com.example.chatmatch.Menu.MenuController;
 import com.example.chatmatch.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -46,6 +48,9 @@ public class ThreadActivity extends AppCompatActivity{
 
     private Query query;
 
+    private MenuController menuController;
+    private BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,11 @@ public class ThreadActivity extends AppCompatActivity{
 
         db = FirebaseFirestore.getInstance();
         threadRef = db.collection("threads");
+
+        int id  = R.id.messaging;
+        bottomNavigationView = findViewById(R.id.bottomNav);
+        menuController = new MenuController(ThreadActivity.this,bottomNavigationView, id);
+        menuController.useMenu();
 
         threads_list_recycler_view = findViewById(R.id.chat_threads_recycler_view);
 
