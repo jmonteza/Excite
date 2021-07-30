@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,9 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.chatmatch.Discover.discover_filter;
-import com.example.chatmatch.Matches.matches;
 import com.example.chatmatch.Menu.MenuController;
 import com.example.chatmatch.R;
+import com.example.chatmatch.Util.FirebaseUtil;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -48,12 +49,19 @@ public class ProfilePhotoActivity extends AppCompatActivity {
 
     private ImageButton reportIssue;
     private ImageButton nvgateFilter;
+
+    private TextView displayName;
+
     ImageButton nvgteFeedback;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_profile);
         profile_photo_iv = findViewById(R.id.profile_picture_imageView);
+
+        displayName = findViewById(R.id.userName);
+        displayName.setText(FirebaseUtil.getAuth().getCurrentUser().getDisplayName());
+
         storage = FirebaseStorage.getInstance();
         int id  = R.id.userprofile;
 

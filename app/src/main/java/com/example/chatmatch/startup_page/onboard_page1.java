@@ -23,6 +23,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -43,6 +45,7 @@ public class onboard_page1 extends AppCompatActivity implements DatePickerDialog
     private Date bday;
     private ArrayList<String> Output;
     private final String TAG = "Onboard Page 1";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,13 +60,13 @@ public class onboard_page1 extends AppCompatActivity implements DatePickerDialog
         bdayBtn = findViewById(R.id.birthdayPicker);
         navigateBtn = findViewById(R.id.uploadDoneBtn);
 
-        FirstName = (EditText)findViewById(R.id.firstName);
+        FirstName = (EditText) findViewById(R.id.firstName);
         bdayPicker = findViewById(R.id.birthdayPicker);
 
         // Bundle bundle = getIntent().getExtras();
         // Output = bundle.getStringArrayList("userDetails");
-        
-        
+
+
 //        for (int i = 0; i < Output.size (); i++)
 //        {
 //            Log.d("array values", Output.get(i));
@@ -77,22 +80,18 @@ public class onboard_page1 extends AppCompatActivity implements DatePickerDialog
             }
         });
         navigateBtn.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
+                new View.OnClickListener() {
+                    public void onClick(View view) {
 
-                        Log.d("birthdate", bday+"");
+                        Log.d("birthdate", bday + "");
 
-                        if (bday == null){
+                        if (bday == null) {
                             Animation shake = AnimationUtils.loadAnimation(onboard_page1.this, R.anim.shake);
                             bdayBtn.startAnimation(shake);
-                        }
-                        else if (FirstName.getText().toString().matches("")){
+                        } else if (FirstName.getText().toString().matches("")) {
                             Animation shake = AnimationUtils.loadAnimation(onboard_page1.this, R.anim.shake);
                             FirstName.startAnimation(shake);
-                        }
-                        else{
+                        } else {
 
                             Intent intent = new Intent(onboard_page1.this, onboard_page2.class);
                             String fName = FirstName.getText().toString().trim();
@@ -109,6 +108,7 @@ public class onboard_page1 extends AppCompatActivity implements DatePickerDialog
                                         @Override
                                         public void onSuccess(Void unused) {
                                             Log.d(TAG, "First Name and Birthday Added");
+                                            setDisplayName(fName);
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -134,11 +134,33 @@ public class onboard_page1 extends AppCompatActivity implements DatePickerDialog
                 });
     }
 
+    private void setDisplayName(String displayName) {
+        FirebaseUser user = FirebaseUtil.getAuth().getCurrentUser();
+
+        UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
+                .setDisplayName(displayName).build();
+
+        if (user != null) {
+            user.updateProfile(request).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+        }
+    }
+
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
 
-        Calendar calendar =  Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -148,6 +170,6 @@ public class onboard_page1 extends AppCompatActivity implements DatePickerDialog
 
         TextView textView = (TextView) findViewById(R.id.age_value);
         textView.setText(currentDate);
-        Log.d("date", currentDate+"");
+        Log.d("date", currentDate + "");
     }
 }
