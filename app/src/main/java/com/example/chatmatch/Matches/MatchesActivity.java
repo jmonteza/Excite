@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chatmatch.Menu.MenuController;
 import com.example.chatmatch.R;
+import com.example.chatmatch.Model.UserModel;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,8 +46,9 @@ public class MatchesActivity extends AppCompatActivity {
     private void setUpRecyclerView() {
         Query query = db.collection("userProfile");
 
-        FirestoreRecyclerOptions<MatchModel> options = new FirestoreRecyclerOptions.Builder<MatchModel>()
-                .setQuery(query, MatchModel.class).build();
+        FirestoreRecyclerOptions<UserModel> options = new FirestoreRecyclerOptions.Builder<UserModel>()
+                .setQuery(query, UserModel.class)
+                .build();
 
         adapter = new MatchFUIAdapter(options);
 

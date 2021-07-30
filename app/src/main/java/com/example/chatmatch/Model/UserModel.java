@@ -1,4 +1,4 @@
-package com.example.chatmatch;
+package com.example.chatmatch.Model;
 
 import java.util.Date;
 

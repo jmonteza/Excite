@@ -14,20 +14,22 @@ import com.example.chatmatch.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.button.MaterialButton;
+import com.example.chatmatch.Model.UserModel;
 
 import org.jetbrains.annotations.NotNull;
 
-public class MatchFUIAdapter extends FirestoreRecyclerAdapter<MatchModel, MatchFUIAdapter.MatchHolder> {
+public class MatchFUIAdapter extends FirestoreRecyclerAdapter<UserModel, MatchFUIAdapter.MatchHolder> {
 
-    public MatchFUIAdapter(@NonNull FirestoreRecyclerOptions<MatchModel> options) {
+
+    public MatchFUIAdapter(@NonNull @NotNull FirestoreRecyclerOptions<UserModel> options) {
         super(options);
     }
 
     @Override
-   protected void onBindViewHolder(@NonNull @NotNull MatchFUIAdapter.MatchHolder holder, int position, @NonNull @NotNull MatchModel model) {
+   protected void onBindViewHolder(@NonNull @NotNull MatchFUIAdapter.MatchHolder holder, int position, @NonNull @NotNull UserModel model) {
         //Set image to imageView
         // holder.imageView.setImageResource(matchCardModel.get(position).getMatchCard());
-        Glide.with(holder.imageView.getContext()).load("https://firebasestorage.googleapis.com/v0/b/chatmatch-b8ec9.appspot.com/o/images%2Fprofile%2Ffemam1.jpg?alt=media&token=d16c5da5-47a5-4b93-b294-3a4829b865d7").into(holder.imageView);
+        Glide.with(holder.imageView.getContext()).load(model.getPhotoURI()).into(holder.imageView);
         //validate button
 
         holder.rejectbtn.setOnClickListener(new View.OnClickListener(){
