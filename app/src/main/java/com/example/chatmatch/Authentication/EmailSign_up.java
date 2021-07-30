@@ -22,6 +22,8 @@ import com.example.chatmatch.Util.FirebaseUtil;
 import com.example.chatmatch.startup_page.onboard_page1;
 import com.example.chatmatch.startup_page.startup_page;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -106,21 +108,44 @@ public class EmailSign_up extends AppCompatActivity {
                                 // SharedPreferences.Editor editor = preferences.edit();
                                 // editor.putString("remember", "true");
                                 // editor.apply();
-                                String id = currentUser.getUid();
 
-                                Map<String, Object> data = new HashMap<>();
-                                data.put("created", FieldValue.serverTimestamp());
-                                FirebaseUtil.uploadUserData(id, data, TAG);
-
-                                Intent intent = new Intent(EmailSign_up.this, onboard_page1.class);
-                                // intent.putStringArrayListExtra("userDetails",  curr_lst);
-                                startActivity(intent);
+                                // Intent intent = new Intent(EmailSign_up.this, onboard_page1.class);
+                                // startActivity(intent);
+                                uploadCreationTimestamp();
+                                goToOnBoarding();
                             }
                         } else {
                             Toast.makeText(EmailSign_up.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+    }
+
+    private void uploadCreationTimestamp(){
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("created", FieldValue.serverTimestamp());
+
+        FirebaseUtil.getFirestore().collection("userProfile").document(id).set(data)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "Creation timestamp added");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Creation timestamp upload failed");
+                    }
+                });
+
+    }
+
+    private void goToOnBoarding(){
+        Intent intent = new Intent(EmailSign_up.this, onboard_page1.class);
+        startActivity(intent);
     }
 
     private void signUp(){

@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +40,7 @@ public class onboard_page1 extends AppCompatActivity implements DatePickerDialog
 
     SharedPreferences sp1;
 
-    private String bday;
+    private Date bday;
     private ArrayList<String> Output;
     private final String TAG = "Onboard Page 1";
     @Override
@@ -103,7 +104,7 @@ public class onboard_page1 extends AppCompatActivity implements DatePickerDialog
 
                             String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                            FirebaseUtil.getFirestore().collection("userProfile").document(id).set(data)
+                            FirebaseUtil.getFirestore().collection("userProfile").document(id).update(data)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
@@ -143,10 +144,10 @@ public class onboard_page1 extends AppCompatActivity implements DatePickerDialog
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        bday = calendar.getTime();
 
         TextView textView = (TextView) findViewById(R.id.age_value);
         textView.setText(currentDate);
-        bday = currentDate;
         Log.d("date", currentDate+"");
     }
 }
