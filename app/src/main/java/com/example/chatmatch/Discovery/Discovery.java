@@ -1,18 +1,33 @@
 package com.example.chatmatch.Discovery;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chatmatch.Menu.MenuController;
-import com.example.chatmatch.R;
 import com.example.chatmatch.Model.UserModel;
+import com.example.chatmatch.R;
+import com.example.chatmatch.Util.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class Discovery extends AppCompatActivity {
 
@@ -21,6 +36,7 @@ public class Discovery extends AppCompatActivity {
     private RecyclerView discoveryRecyclerView;
     private MenuController menuController;
     private BottomNavigationView bottomNavigationView;
+    private final String TAG = "Discovery Activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +64,42 @@ public class Discovery extends AppCompatActivity {
                 .build();
 
         adapter = new DiscoveryAdapter(options);
+
+        adapter.setOnItemClickListener(new DiscoveryAdapter.OnItemClickListener() {
+            @Override
+            public void onWinkClick(DocumentSnapshot documentSnapshot, int position) throws InterruptedException, GeneralSecurityException, IOException {
+                String discovered_user_id = documentSnapshot.getId();
+                winkAt(discovered_user_id);
+                Toast.makeText(Discovery.this, discovered_user_id, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         discoveryRecyclerView = findViewById(R.id.recycler_view);
         discoveryRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         discoveryRecyclerView.setAdapter(adapter);
 
+    }
+
+    private void winkAt(String discovered_user_id){
+        String id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("winkAt", FieldValue.arrayUnion(discovered_user_id));
+
+        FirebaseUtil.getFirestore().collection("userProfile").document(id).update(data)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "Wink At added");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Wink At Failed");
+                    }
+                });
     }
 
     @Override

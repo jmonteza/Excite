@@ -80,9 +80,9 @@ public class ThreadAdapter extends FirestoreRecyclerAdapter<ThreadModel, ThreadA
     }
 
     class ThreadHolder extends RecyclerView.ViewHolder {
-        private ShapeableImageView thread_user_image;
-        private TextView thread_fullname;
-        private TextView thread_recent_message;
+        private final ShapeableImageView thread_user_image;
+        private final TextView thread_fullname;
+        private final TextView thread_recent_message;
 
         public ThreadHolder(@NonNull @NotNull View itemView) {
             super(itemView);

@@ -45,7 +45,7 @@ public class MatchFUIAdapter extends FirestoreRecyclerAdapter<UserModel, MatchFU
    @NotNull
    @Override
    public MatchHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item, parent, false);
+       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_row_item, parent, false);
        return new MatchHolder(view);
    }
 
@@ -55,7 +55,7 @@ public class MatchFUIAdapter extends FirestoreRecyclerAdapter<UserModel, MatchFU
         public MatchHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imgView);
-            rejectbtn = (MaterialButton) itemView.findViewById(R.id.btn_reject);
+            rejectbtn = (MaterialButton) itemView.findViewById(R.id.btn_wave);
         }
     }
 }

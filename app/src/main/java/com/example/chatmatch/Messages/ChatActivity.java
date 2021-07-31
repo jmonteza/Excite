@@ -18,6 +18,7 @@ import com.example.chatmatch.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -141,7 +142,8 @@ public class ChatActivity extends AppCompatActivity {
 
     public void sendMessage(View v) {
         String message_value = message_et.getText().toString();
-        ChatModel message = new ChatModel("Sender UID", "Right", message_value);
+        String sender_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        ChatModel message = new ChatModel(sender_uid, "Right", message_value);
         messagesRef.add(message).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {

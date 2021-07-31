@@ -31,7 +31,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
 
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_item, parent, false);
+                .inflate(R.layout.match_row_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -63,7 +63,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imgView);
-            this.rejectbtn = (MaterialButton) itemView.findViewById(R.id.btn_reject);
+            this.rejectbtn = (MaterialButton) itemView.findViewById(R.id.btn_wave);
         }
     }
 }

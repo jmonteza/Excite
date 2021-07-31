@@ -43,7 +43,7 @@ public class discoverAdapter extends RecyclerView.Adapter<discoverAdapter.ViewHo
 
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.match_row_item, parent, false);
+                .inflate(R.layout.discover_row_item, parent, false);
         return new discoverAdapter.ViewHolder(view);
     }
 
