@@ -191,7 +191,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/gender_s2"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:text="Who are you\n Intereted in?"
+            android:text="Who are you\n Interested in?"
             android:fontFamily="@font/montserrat"
             android:layout_marginTop="75dp"
 

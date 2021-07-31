@@ -72,6 +72,13 @@ public class Discovery extends AppCompatActivity {
                 winkAt(discovered_user_id);
                 Toast.makeText(Discovery.this, discovered_user_id, Toast.LENGTH_SHORT).show();
             }
+
+            @Override
+            public void onWaveClick(DocumentSnapshot documentSnapshot, int position) throws InterruptedException, GeneralSecurityException, IOException {
+                String discovered_user_id  = documentSnapshot.getId();
+                waveAt(discovered_user_id);
+                Toast.makeText(Discovery.this, discovered_user_id, Toast.LENGTH_SHORT).show();
+            }
         });
 
 
@@ -97,7 +104,28 @@ public class Discovery extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Wink At Failed");
+                        Log.w(TAG, "Wink At failed");
+                    }
+                });
+    }
+
+    private void waveAt(String discovered_user_id){
+        String id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("waveAt", FieldValue.arrayUnion(discovered_user_id));
+
+        FirebaseUtil.getFirestore().collection("userProfile").document(id).update(data)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "Wave At added");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Wave At failed");
                     }
                 });
     }

@@ -45,11 +45,12 @@ public class DiscoveryAdapter extends FirestoreRecyclerAdapter<UserModel, Discov
         return new DiscoveryHolder(view);
     }
 
-    class DiscoveryHolder extends RecyclerView.ViewHolder{
+    class DiscoveryHolder extends RecyclerView.ViewHolder {
         private final TextView userName;
         private final ImageView userDisplay;
         private final ImageButton winkBtn;
         private final ImageButton waveBtn;
+
         public DiscoveryHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             userName = itemView.findViewById(R.id.usrCardname);
@@ -57,7 +58,7 @@ public class DiscoveryAdapter extends FirestoreRecyclerAdapter<UserModel, Discov
             winkBtn = itemView.findViewById(R.id.btn_wink);
             waveBtn = itemView.findViewById(R.id.btn_wave);
 
-            winkBtn.setOnClickListener(new View.OnClickListener(){
+            winkBtn.setOnClickListener(new View.OnClickListener() {
                 /**
                  * Called when a view has been clicked.
                  *
@@ -66,9 +67,23 @@ public class DiscoveryAdapter extends FirestoreRecyclerAdapter<UserModel, Discov
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION  && listener != null){
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
                         try {
                             listener.onWinkClick(getSnapshots().getSnapshot(position), position);
+                        } catch (InterruptedException | GeneralSecurityException | IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
+            waveBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        try {
+                            listener.onWaveClick(getSnapshots().getSnapshot(position), position);
                         } catch (InterruptedException | GeneralSecurityException | IOException e) {
                             e.printStackTrace();
                         }
@@ -79,11 +94,13 @@ public class DiscoveryAdapter extends FirestoreRecyclerAdapter<UserModel, Discov
         }
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onWinkClick(DocumentSnapshot documentSnapshot, int position) throws InterruptedException, GeneralSecurityException, IOException;
+
+        void onWaveClick(DocumentSnapshot documentSnapshot, int position) throws InterruptedException, GeneralSecurityException, IOException;
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 

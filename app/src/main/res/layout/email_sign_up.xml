@@ -142,7 +142,7 @@
             android:id="@+id/verify_password_signup_editText"
             android:layout_width="286dp"
             android:layout_height="52dp"
-            android:hint="@string/password"
+            android:hint="@string/confirm_password"
             android:paddingLeft="60dp"
             android:paddingTop="7dp"
             android:inputType="textPassword"
