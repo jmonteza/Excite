@@ -57,6 +57,7 @@ public class ProfilePhotoActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_profile);
+        overridePendingTransition(0, 0);
         profile_photo_iv = findViewById(R.id.profile_picture_imageView);
 
         String photoURL = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString();

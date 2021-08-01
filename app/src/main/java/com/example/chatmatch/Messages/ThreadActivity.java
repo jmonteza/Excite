@@ -55,7 +55,7 @@ public class ThreadActivity extends AppCompatActivity{
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_thread);
-
+        overridePendingTransition(0, 0);
         db = FirebaseFirestore.getInstance();
         threadRef = db.collection("threads");
 

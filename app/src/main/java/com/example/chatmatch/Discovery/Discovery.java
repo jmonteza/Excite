@@ -42,6 +42,7 @@ public class Discovery extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover);
+        overridePendingTransition(0, 0);
 
         db = FirebaseFirestore.getInstance();
         int id = R.id.connect;
