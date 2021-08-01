@@ -8,6 +8,7 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.chatmatch.Discovery.Discovery;
 import com.example.chatmatch.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,8 +27,15 @@ public class AuthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_or_login);
 
+        mAuth = FirebaseAuth.getInstance();
+
+
+
         login_btn = findViewById(R.id.log_in_redirect_btn);
         sign_up_with_email_btn = findViewById(R.id.sign_up_redirect2_btn);
+
+        login_btn.setVisibility(View.GONE);
+        sign_up_with_email_btn.setVisibility(View.GONE);
 
         sign_up_with_email_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +54,7 @@ public class AuthActivity extends AppCompatActivity {
         });
 
 
-        // mAuth = FirebaseAuth.getInstance();
+
 
         // currentUser = mAuth.getCurrentUser();
         //
@@ -69,6 +77,23 @@ public class AuthActivity extends AppCompatActivity {
 //        Log.d("User", currentUser.getEmail());
 
 
+    }
+
+    private void alreadyLoggedIn(){
+        Intent intent = new Intent(AuthActivity.this, Discovery.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null){
+            alreadyLoggedIn();
+        } else {
+            login_btn.setVisibility(View.VISIBLE);
+            sign_up_with_email_btn.setVisibility(View.VISIBLE);
+        }
     }
 
     // private void createAccount(String email, String password){
