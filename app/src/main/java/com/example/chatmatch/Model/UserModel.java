@@ -1,5 +1,6 @@
 package com.example.chatmatch.Model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class UserModel {
@@ -10,6 +11,9 @@ public class UserModel {
     private Date created;
     private String interest;
     private String gender;
+    private ArrayList<String> winkAt;
+    private ArrayList<String> waveAt;
+
 
 
     public UserModel(){
@@ -72,5 +76,21 @@ public class UserModel {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public ArrayList<String> getWinkAt() {
+        return winkAt;
+    }
+
+    public void setWinkAt(ArrayList<String> winkAt) {
+        this.winkAt = winkAt;
+    }
+
+    public ArrayList<String> getWaveAt() {
+        return waveAt;
+    }
+
+    public void setWaveAt(ArrayList<String> waveAt) {
+        this.waveAt = waveAt;
     }
 }
