@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chatmatch.Authentication.EmailSign_up;
+import com.example.chatmatch.Authentication.EmailSignUp;
 import com.example.chatmatch.Matches.MatchesActivity;
 import com.example.chatmatch.R;
 
@@ -37,7 +37,7 @@ public class startup_page extends AppCompatActivity {
         EmailNavigate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(startup_page.this, EmailSign_up.class);
+                Intent intent = new Intent(startup_page.this, EmailSignUp.class);
                 startActivity(intent);
             }
         });

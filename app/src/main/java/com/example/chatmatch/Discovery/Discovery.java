@@ -1,5 +1,6 @@
 package com.example.chatmatch.Discovery;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chatmatch.Authentication.AuthActivity;
 import com.example.chatmatch.Menu.MenuController;
 import com.example.chatmatch.Model.UserModel;
 import com.example.chatmatch.R;
@@ -23,13 +25,15 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Discovery extends AppCompatActivity {
+public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthStateListener {
 
     private FirebaseFirestore db;
     private DiscoveryAdapter adapter;
@@ -134,6 +138,7 @@ public class Discovery extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        FirebaseAuth.getInstance().addAuthStateListener(this);
         adapter.startListening();
     }
 
@@ -141,5 +146,21 @@ public class Discovery extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
+        FirebaseAuth.getInstance().removeAuthStateListener(this);
     }
+
+    @Override
+    public void onAuthStateChanged(@NonNull @NotNull FirebaseAuth firebaseAuth) {
+        if (firebaseAuth.getCurrentUser() == null){
+            goToAuthActivity();
+        }
+    }
+
+
+    private void goToAuthActivity(){
+        Intent intent = new Intent(this, AuthActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }

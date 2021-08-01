@@ -1,8 +1,6 @@
 package com.example.chatmatch.Authentication;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chatmatch.Discovery.Discovery;
 import com.example.chatmatch.R;
 import com.example.chatmatch.Util.FirebaseUtil;
 import com.example.chatmatch.startup_page.onboard_page1;
@@ -32,11 +29,10 @@ import com.google.firebase.firestore.FieldValue;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EmailSign_up extends AppCompatActivity {
+public class EmailSignUp extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private EditText email_signup_et;
@@ -45,16 +41,15 @@ public class EmailSign_up extends AppCompatActivity {
     private FirebaseUser currentUser;
     private Button sign_up_btn;
     private ImageButton login_redirect_btn;
-    private ArrayList<String> curr_lst;
+    // private ArrayList<String> curr_lst;
     private final String TAG = "Email Signup";
-    SharedPreferences sp;
+    // SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.email_sign_up);
-
-        sp = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
+        // sp = getSharedPreferences("userPref1", Context.MODE_PRIVATE);
 
         mAuth = FirebaseAuth.getInstance();
         email_signup_et = findViewById(R.id.email_signup_editText);
@@ -68,16 +63,16 @@ public class EmailSign_up extends AppCompatActivity {
             }
         });
 
-        SharedPreferences preferences = getSharedPreferences("remember_user", MODE_PRIVATE);
-        String remembered = preferences.getString("remember", "");
+        // SharedPreferences preferences = getSharedPreferences("remember_user", MODE_PRIVATE);
+        // String remembered = preferences.getString("remember", "");
 
-        if (remembered.equals("true")){
-            Intent intent = new Intent(EmailSign_up.this, Discovery.class);
-            startActivity(intent);
-        }
-        else if (remembered.equals("false")){
-            Log.d("not logged in", "please log in ");
-        }
+        // if (remembered.equals("true")){
+        //     Intent intent = new Intent(EmailSignUp.this, Discovery.class);
+        //     startActivity(intent);
+        // }
+        // else if (remembered.equals("false")){
+        //     Log.d("not logged in", "please log in ");
+        // }
         login_redirect_btn = findViewById(R.id.login_redirect_btn);
         login_redirect_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +80,7 @@ public class EmailSign_up extends AppCompatActivity {
                 email_signup_et.getText().clear();
                 password_signup_et.getText().clear();
                 verify_password_signup_et.getText().clear();
-                Intent intent = new Intent(EmailSign_up.this, startup_page.class);
+                Intent intent = new Intent(EmailSignUp.this, startup_page.class);
                 startActivity(intent);
             }
         });
@@ -93,7 +88,7 @@ public class EmailSign_up extends AppCompatActivity {
 
     private void createAccount(String email, String password){
         mAuth.createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(EmailSign_up.this, new OnCompleteListener<AuthResult>(){
+                .addOnCompleteListener(EmailSignUp.this, new OnCompleteListener<AuthResult>(){
                     @Override
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -109,13 +104,13 @@ public class EmailSign_up extends AppCompatActivity {
                                 // editor.putString("remember", "true");
                                 // editor.apply();
 
-                                // Intent intent = new Intent(EmailSign_up.this, onboard_page1.class);
+                                // Intent intent = new Intent(EmailSignUp.this, onboard_page1.class);
                                 // startActivity(intent);
                                 uploadCreationTimestamp();
                                 goToOnBoarding();
                             }
                         } else {
-                            Toast.makeText(EmailSign_up.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EmailSignUp.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -144,7 +139,7 @@ public class EmailSign_up extends AppCompatActivity {
     }
 
     private void goToOnBoarding(){
-        Intent intent = new Intent(EmailSign_up.this, onboard_page1.class);
+        Intent intent = new Intent(EmailSignUp.this, onboard_page1.class);
         startActivity(intent);
     }
 
@@ -162,9 +157,9 @@ public class EmailSign_up extends AppCompatActivity {
         // editor.apply();
 
 //        LocalUser.saveLocalData(email, password);
-//        Toast.makeText(EmailSign_up.this, "info saved", Toast.LENGTH_LONG).show();
+//        Toast.makeText(EmailSignUp.this, "info saved", Toast.LENGTH_LONG).show();
         if (email.length() <= 0 || password.length() <= 0 || verify_password.length() <= 0){
-            Animation shake = AnimationUtils.loadAnimation(EmailSign_up.this, R.anim.shake);
+            Animation shake = AnimationUtils.loadAnimation(EmailSignUp.this, R.anim.shake);
             email_signup_et.startAnimation(shake);
             password_signup_et.startAnimation(shake);
             verify_password_signup_et.startAnimation(shake);
