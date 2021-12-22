@@ -13,6 +13,7 @@ import com.example.chatmatch.Matches.MatchesActivity;
 import com.example.chatmatch.Messages.ThreadActivity;
 import com.example.chatmatch.R;
 import com.example.chatmatch.User.ProfilePhotoActivity;
+import com.example.chatmatch.User.UserProfile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -63,7 +64,7 @@ public class MenuController implements NavigationView.OnNavigationItemSelectedLi
                     ((Activity)context).finish();
                     return true;
                 } else if (id == R.id.userprofile){
-                    intent = new Intent(context, ProfilePhotoActivity.class);
+                    intent = new Intent(context, UserProfile.class);
                     context.startActivity(intent);
                     ((Activity)context).finish();
                     return true;
