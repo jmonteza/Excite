@@ -47,13 +47,13 @@ public class UserProfile extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNav);
         menuController = new MenuController(UserProfile.this,bottomNavigationView, id);
         menuController.useMenu();
-
-//        profileImageView = findViewById(R.id.my_profile_picture_imageView);
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String url = "https://firebasestorage.googleapis.com/v0/b/chatmatch-b8ec9.appspot.com/o/images%2Fprofile%2Ffemam2.jpg?alt=media&token=1150ce58-d38a-4a84-9e1d-2f4f4369915d";
+        profileImageView = findViewById(R.id.my_profile_picture_imageView);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 //        if (user != null){
 //            if (user.getPhotoUrl() != null){
-//                Glide.with(this).load(user.getPhotoUrl()).into(profileImageView);
+        Glide.with(this).load(url).into(profileImageView);
 //            }
 //        }
 
