@@ -20,7 +20,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -60,8 +62,11 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
 
 
     private void setUpRecyclerView() {
-        //Query
-        Query query = db.collection("userProfile");
+        //Query (filter yourself)
+
+        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        Query query = db.collection("userProfile").whereEqualTo("gender", "Male").whereNotEqualTo(FieldPath.documentId(), user_id);
 
         //Recycler options
         FirestoreRecyclerOptions<UserModel> options = new FirestoreRecyclerOptions.Builder<UserModel>()
