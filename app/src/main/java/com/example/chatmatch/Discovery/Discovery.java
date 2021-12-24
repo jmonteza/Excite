@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,10 +22,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 
 import org.jetbrains.annotations.NotNull;
@@ -44,6 +48,9 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
     private BottomNavigationView bottomNavigationView;
     private final String TAG = "Discovery Activity";
 
+    // Men or Women
+    private String interest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,17 +63,37 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
         menuController = new MenuController(this, bottomNavigationView, id);
         menuController.useMenu();
 
+        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        setUpRecyclerView();
+        DocumentReference docRef = db.collection("userProfile").document(user_id);
+
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null){
+                    Log.w(TAG, "Listen failed", error);
+                }
+
+                if (value != null && value.exists()) {
+                    String interest = value.get("interest").toString();
+                    setUpRecyclerView(interest);
+                } else {
+                    Log.d(TAG, "Current data: null");
+                }
+            }
+        });
+
     }
 
 
-    private void setUpRecyclerView() {
+    private void setUpRecyclerView(String interest) {
         //Query (filter yourself)
 
         String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        Query query = db.collection("userProfile").whereEqualTo("gender", "Male").whereNotEqualTo(FieldPath.documentId(), user_id);
+        String interestedGender = (interest.equals("Women")) ? "Female" : "Male";
+
+        Query query = db.collection("userProfile").whereEqualTo("gender", interestedGender).whereNotEqualTo(FieldPath.documentId(), user_id);
 
         //Recycler options
         FirestoreRecyclerOptions<UserModel> options = new FirestoreRecyclerOptions.Builder<UserModel>()
@@ -85,7 +112,7 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
 
             @Override
             public void onWaveClick(DocumentSnapshot documentSnapshot, int position) throws InterruptedException, GeneralSecurityException, IOException {
-                String discovered_user_id  = documentSnapshot.getId();
+                String discovered_user_id = documentSnapshot.getId();
                 waveAt(discovered_user_id);
                 Toast.makeText(Discovery.this, discovered_user_id, Toast.LENGTH_SHORT).show();
             }
@@ -94,11 +121,13 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
 
         discoveryRecyclerView = findViewById(R.id.recycler_view);
         discoveryRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        adapter.startListening();
         discoveryRecyclerView.setAdapter(adapter);
 
     }
 
-    private void winkAt(String discovered_user_id){
+    private void winkAt(String discovered_user_id) {
         String id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
         Map<String, Object> data = new HashMap<>();
@@ -119,7 +148,7 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
                 });
     }
 
-    private void waveAt(String discovered_user_id){
+    private void waveAt(String discovered_user_id) {
         String id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
         Map<String, Object> data = new HashMap<>();
@@ -144,7 +173,7 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
     protected void onStart() {
         super.onStart();
         FirebaseAuth.getInstance().addAuthStateListener(this);
-        adapter.startListening();
+
     }
 
     @Override
@@ -156,13 +185,13 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
 
     @Override
     public void onAuthStateChanged(@NonNull @NotNull FirebaseAuth firebaseAuth) {
-        if (firebaseAuth.getCurrentUser() == null){
+        if (firebaseAuth.getCurrentUser() == null) {
             goToAuthActivity();
         }
     }
 
 
-    private void goToAuthActivity(){
+    private void goToAuthActivity() {
         Intent intent = new Intent(this, AuthActivity.class);
         startActivity(intent);
         finish();
