@@ -35,7 +35,9 @@
         <activity android:name=".Discover.discover" />
         <activity android:name=".Authentication.EmailSignUp" />
         <activity android:name=".Messages.ThreadActivity" />
-        <activity android:name=".Messages.ChatActivity" />
+        <activity android:name=".Messages.ChatActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".Messages.ThreadActivity"/>
+        </activity>
         <activity android:name=".Matches.MatchesActivity"/>
         <activity android:name=".startup_page.onboard_page3v2"/>
         <activity android:name=".Authentication.Login"/>

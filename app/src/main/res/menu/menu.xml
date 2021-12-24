@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/connect"
-        android:title=""
+        android:title="Discover"
         android:icon="@drawable/connect1"
         />
     <item
         android:id="@+id/discovery"
-        android:title=""
+        android:title="Matches"
         android:icon="@drawable/discover"
         />
     <item
         android:id="@+id/messaging"
-        android:title=""
+        android:title="Chat"
         android:icon="@drawable/messages"
         />
     <item
         android:id="@+id/userprofile"
-        android:title=""
+        android:title="Profile"
         android:icon="@drawable/profile"
         />
 </menu>

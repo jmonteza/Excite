@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="20sp">
+            android:padding="10sp">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -52,7 +52,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:paddingLeft="20sp"
+                android:paddingStart="20sp"
                 android:paddingBottom="4sp">
 
                 <TextView
@@ -68,6 +68,7 @@
 
 
                 <TextView
+                    android:id="@+id/profile_age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="21"
@@ -89,6 +90,13 @@
                 android:textColor="@color/white"
                 app:backgroundTint="@color/matches" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/profile_user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User ID"/>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -115,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:padding="10sp"
-            android:text="Studying"
+            android:text="Education"
             android:textAllCaps="true"
             android:textColor="@color/matches"
             android:textSize="20sp"
