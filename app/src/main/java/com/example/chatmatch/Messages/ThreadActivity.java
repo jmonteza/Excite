@@ -18,6 +18,7 @@ import com.example.chatmatch.Menu.MenuController;
 import com.example.chatmatch.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.Objects;
 
 public class ThreadActivity extends AppCompatActivity{
     /**
@@ -71,7 +73,9 @@ public class ThreadActivity extends AppCompatActivity{
 
     private void setUpRecyclerView(){
         //
-        query = threadRef.orderBy("timestamp", Query.Direction.DESCENDING);
+        String user_id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+        query = threadRef.orderBy("timestamp", Query.Direction.DESCENDING).whereArrayContains("members", user_id);
         // query = threadRef.orderBy("timestamp", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<ThreadModel> options = new FirestoreRecyclerOptions.Builder<ThreadModel>()
                 .setQuery(query,ThreadModel.class).build();

@@ -35,6 +35,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -70,7 +71,7 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null){
+                if (error != null) {
                     Log.w(TAG, "Listen failed", error);
                 }
 
@@ -89,7 +90,7 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
     private void setUpRecyclerView(String interest) {
         //Query (filter yourself)
 
-        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String user_id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
         String interestedGender = (interest.equals("Women")) ? "Female" : "Male";
 
@@ -113,7 +114,8 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
             @Override
             public void onWaveClick(DocumentSnapshot documentSnapshot, int position) throws InterruptedException, GeneralSecurityException, IOException {
                 String discovered_user_id = documentSnapshot.getId();
-                waveAt(discovered_user_id);
+//                waveAt(discovered_user_id);
+                createChatThread(discovered_user_id);
                 Toast.makeText(Discovery.this, discovered_user_id, Toast.LENGTH_SHORT).show();
             }
         });
@@ -167,6 +169,29 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
                         Log.w(TAG, "Wave At failed");
                     }
                 });
+    }
+
+    private void createChatThread(String discovered_user_id) {
+        String own_user_id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("full_name", "Testing");
+        data.put("last_message", "Testing new features...");
+        data.put("members", Arrays.asList(own_user_id, discovered_user_id));
+        data.put("photoURI", "https://firebasestorage.googleapis.com/v0/b/chatmatch-b8ec9.appspot.com/o/images%2Fprofile%2Ffemam1.jpg?alt=media&token=d16c5da5-47a5-4b93-b294-3a4829b865d7");
+        data.put("timestamp", FieldValue.serverTimestamp());
+
+        FirebaseUtil.getFirestore().collection("threads").add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error adding document", e);
+            }
+        });
     }
 
     @Override

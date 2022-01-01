@@ -13,8 +13,11 @@ import com.example.chatmatch.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class ChatAdapter extends FirestoreRecyclerAdapter<ChatModel, ChatAdapter.ChatHolder> {
 
@@ -67,14 +70,13 @@ public class ChatAdapter extends FirestoreRecyclerAdapter<ChatModel, ChatAdapter
     @Override
     public int getItemViewType(int position) {
         // return super.getItemViewType(position);
-        if (super.getItem(position).getReceiver_uid().equals("left")){
+        String own_user_id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+        if (super.getItem(position).getSender_uid().equals(own_user_id)){
             // 0: left
-            return MSG_TYPE_LEFT;
-        } else if (super.getItem(position).getReceiver_uid().equals("right")) {
-            // 1: right
             return MSG_TYPE_RIGHT;
         } else {
-            return 2;
+            return MSG_TYPE_LEFT;
         }
     }
 
