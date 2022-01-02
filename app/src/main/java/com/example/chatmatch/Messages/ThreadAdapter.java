@@ -1,28 +1,40 @@
 package com.example.chatmatch.Messages;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.chatmatch.R;
+import com.example.chatmatch.Util.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.List;
+import java.util.Objects;
 
 public class ThreadAdapter extends FirestoreRecyclerAdapter<ThreadModel, ThreadAdapter.ThreadHolder> {
 
     private OnItemClickListener listener;
+    private static final String TAG = "ThreadAdapter";
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -43,7 +55,8 @@ public class ThreadAdapter extends FirestoreRecyclerAdapter<ThreadModel, ThreadA
     @Override
     protected void onBindViewHolder(@NonNull @NotNull ThreadAdapter.ThreadHolder holder, int position, @NonNull @NotNull ThreadModel model) {
         Glide.with(holder.thread_user_image.getContext()).load(model.getPhotoURI()).into(holder.thread_user_image);
-        holder.thread_fullname.setText(model.getFull_name());
+//        holder.thread_fullname.setText(model.getFull_name());
+        getFriendName(holder, model.getMembers());
         holder.thread_recent_message.setText(model.getLast_message());
     }
 
@@ -75,7 +88,7 @@ public class ThreadAdapter extends FirestoreRecyclerAdapter<ThreadModel, ThreadA
         return new ThreadHolder(view);
     }
 
-    public void deleteThread(int position){
+    public void deleteThread(int position) {
         getSnapshots().getSnapshot(position).getReference().delete();
     }
 
@@ -94,7 +107,7 @@ public class ThreadAdapter extends FirestoreRecyclerAdapter<ThreadModel, ThreadA
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION  && listener != null){
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
                         try {
                             listener.onItemClick(getSnapshots().getSnapshot(position), position);
                         } catch (InterruptedException | GeneralSecurityException | IOException e) {
@@ -108,12 +121,37 @@ public class ThreadAdapter extends FirestoreRecyclerAdapter<ThreadModel, ThreadA
 
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(DocumentSnapshot documentSnapshot, int position) throws InterruptedException, GeneralSecurityException, IOException;
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
+    private void getFriendName(@NonNull @NotNull ThreadAdapter.ThreadHolder holder, List<String> members) {
+
+        String user_id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+        String friend_uid = user_id.equals(members.get(0)) ? members.get(1) : members.get(0);
+
+        DocumentReference docRef = FirebaseUtil.getFirestore().collection("userProfile").document(friend_uid);
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                }
+                if (snapshot != null && snapshot.exists()) {
+                    String firstName = snapshot.getString("firstName");
+                    holder.thread_fullname.setText(firstName);
+                } else {
+                    Log.d(TAG, "Current data: null");
+                }
+            }
+        });
+
+    }
 }

@@ -17,6 +17,7 @@ import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKey;
 
 import com.example.chatmatch.R;
+import com.example.chatmatch.Util.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,7 +27,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +37,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
+import java.util.Objects;
 
 public class ChatActivity extends AppCompatActivity {
     /**
@@ -69,7 +73,8 @@ public class ChatActivity extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
 
         db = FirebaseFirestore.getInstance();
 
@@ -129,7 +134,7 @@ public class ChatActivity extends AppCompatActivity {
 
                         assert members != null;
                         String receiver_uid = (members.get(0).equals(own_user_id)) ? members.get(1) : members.get(0);
-
+                        setTitleBarToFriendName(receiver_uid);
                         Context context = ChatActivity.this;
                         MasterKey masterKey = null;
                         try {
@@ -193,6 +198,28 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setTitleBarToFriendName(String friend_uid){
+        final DocumentReference docRef = FirebaseUtil.getFirestore().collection("userProfile").document(friend_uid);
+
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    Objects.requireNonNull(getSupportActionBar()).setTitle(snapshot.getString("firstName"));
+                } else {
+                    Log.d(TAG, "Current data: null");
+                }
+            }
+        });
+
     }
 
     @Override
