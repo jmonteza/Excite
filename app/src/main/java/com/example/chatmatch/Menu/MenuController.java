@@ -65,6 +65,7 @@ public class MenuController implements NavigationView.OnNavigationItemSelectedLi
                     return true;
                 } else if (id == R.id.userprofile){
                     intent = new Intent(context, UserProfile.class);
+                    intent.putExtra("mode", "own");
                     context.startActivity(intent);
                     ((Activity)context).finish();
                     return true;

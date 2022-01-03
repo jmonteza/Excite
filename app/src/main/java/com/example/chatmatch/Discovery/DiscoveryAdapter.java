@@ -58,6 +58,20 @@ public class DiscoveryAdapter extends FirestoreRecyclerAdapter<UserModel, Discov
             winkBtn = itemView.findViewById(R.id.btn_wink);
             waveBtn = itemView.findViewById(R.id.btn_wave);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        try {
+                            listener.onItemClick(getSnapshots().getSnapshot(position), position);
+                        } catch (InterruptedException | GeneralSecurityException | IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
             winkBtn.setOnClickListener(new View.OnClickListener() {
                 /**
                  * Called when a view has been clicked.
@@ -92,12 +106,15 @@ public class DiscoveryAdapter extends FirestoreRecyclerAdapter<UserModel, Discov
             });
 
         }
+
     }
 
     public interface OnItemClickListener {
         void onWinkClick(DocumentSnapshot documentSnapshot, int position) throws InterruptedException, GeneralSecurityException, IOException;
 
         void onWaveClick(DocumentSnapshot documentSnapshot, int position) throws InterruptedException, GeneralSecurityException, IOException;
+
+        void onItemClick(DocumentSnapshot documentSnapshot, int position) throws InterruptedException, GeneralSecurityException, IOException;
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {

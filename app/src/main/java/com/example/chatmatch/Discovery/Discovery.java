@@ -1,5 +1,6 @@
 package com.example.chatmatch.Discovery;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,11 +11,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKey;
 
 import com.example.chatmatch.Authentication.AuthActivity;
 import com.example.chatmatch.Menu.MenuController;
+import com.example.chatmatch.Messages.ChatActivity;
+import com.example.chatmatch.Messages.ThreadActivity;
 import com.example.chatmatch.Model.UserModel;
 import com.example.chatmatch.R;
+import com.example.chatmatch.User.UserProfile;
 import com.example.chatmatch.Util.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -118,6 +124,16 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
                 createChatThread(discovered_user_id);
                 Toast.makeText(Discovery.this, discovered_user_id, Toast.LENGTH_SHORT).show();
             }
+
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) throws InterruptedException, GeneralSecurityException, IOException {
+                String discovered_user_id = documentSnapshot.getId();
+                Toast.makeText(Discovery.this, discovered_user_id, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Discovery.this, UserProfile.class);
+                intent.putExtra("mode", "friend");
+                intent.putExtra("uid", discovered_user_id);
+                startActivity(intent);
+            }
         });
 
 
@@ -184,7 +200,37 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
         FirebaseUtil.getFirestore().collection("threads").add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
+                String thread_id = documentReference.getId();
                 Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+
+                Context context = Discovery.this;
+                MasterKey masterKey = null;
+                try {
+                    masterKey = new MasterKey.Builder(context)
+                            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                            .build();
+                } catch (GeneralSecurityException | IOException e) {
+                    e.printStackTrace();
+                }
+
+                EncryptedSharedPreferences sharedPreferences = null;
+                try {
+                    sharedPreferences = (EncryptedSharedPreferences) EncryptedSharedPreferences
+                            .create(
+                                    context,
+                                    "ExciteEncryptedSharedPref",
+                                    masterKey,
+                                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+                            );
+                } catch (GeneralSecurityException | IOException e) {
+                    e.printStackTrace();
+                }
+
+                sharedPreferences.edit().putString("thread_id", thread_id).apply();
+                Intent intent = new Intent(Discovery.this, ChatActivity.class);
+                startActivity(intent);
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -192,6 +238,18 @@ public class Discovery extends AppCompatActivity implements FirebaseAuth.AuthSta
                 Log.w(TAG, "Error adding document", e);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        adapter.stopListening();
     }
 
     @Override

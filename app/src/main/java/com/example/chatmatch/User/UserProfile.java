@@ -44,6 +44,9 @@ public class UserProfile extends AppCompatActivity {
     private RecyclerView matchRecyclerView;
     private MenuController menuController;
     private BottomNavigationView bottomNavigationView;
+
+    private String user_id;
+
     /**
      * {@inheritDoc}
      * <p>
@@ -59,43 +62,58 @@ public class UserProfile extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        int id  = R.id.userprofile;
+        int id = R.id.userprofile;
         bottomNavigationView = findViewById(R.id.bottomNav);
-        menuController = new MenuController(UserProfile.this,bottomNavigationView, id);
+        menuController = new MenuController(UserProfile.this, bottomNavigationView, id);
         menuController.useMenu();
+
 
         profileUserIdTextView = findViewById(R.id.profile_user_id);
         profileNameTextView = findViewById(R.id.profile_name);
         profileAgeTextView = findViewById(R.id.profile_age);
 
         profileImageView = findViewById(R.id.my_profile_picture_imageView);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user != null){
-            String url = "https://firebasestorage.googleapis.com/v0/b/chatmatch-b8ec9.appspot.com/o/images%2Fprofile%2Ffemam2.jpg?alt=media&token=1150ce58-d38a-4a84-9e1d-2f4f4369915d";
-            if (user.getPhotoUrl() != null){
-                Glide.with(this).load(user.getPhotoUrl()).into(profileImageView);
+//        Retrieve the bundle
+        Bundle bundle = getIntent().getExtras();
+        String mode = bundle.getString("mode");
+
+//        Case 1: Own profile
+        if (mode.equals("own")) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user != null) {
+                String url = "https://firebasestorage.googleapis.com/v0/b/chatmatch-b8ec9.appspot.com/o/images%2Fprofile%2Ffemam2.jpg?alt=media&token=1150ce58-d38a-4a84-9e1d-2f4f4369915d";
+                if (user.getPhotoUrl() != null) {
+                    Glide.with(this).load(user.getPhotoUrl()).into(profileImageView);
+                } else {
+                    Glide.with(this).load(url).into(profileImageView);
+                }
+                user_id = user.getUid();
             }
-            else{
-                Glide.with(this).load(url).into(profileImageView);
-            }
+
         }
 
-        assert user != null;
-        profileUserIdTextView.setText(user.getUid());
+//        Case 2: Friend's profile
+        else if (mode.equals("friend")) {
+            user_id = bundle.getString("uid");
+
+        }
+
+
+        profileUserIdTextView.setText(user_id);
 //        profileNameTextView.setText(user.getDisplayName());
 
 
-        final DocumentReference docRef = db.collection("userProfile").document(user.getUid());
+        final DocumentReference docRef = db.collection("userProfile").document(user_id);
 
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null){
+                if (error != null) {
                     Log.w(TAG, "Listen failed", error);
                     return;
                 }
-                if (value != null && value.exists()){
+                if (value != null && value.exists()) {
 
 //                    Log.d(TAG, "Current data: " + );
                     profileNameTextView.setText(new StringBuilder().append(Objects.requireNonNull(value.get("firstName")).toString()).append(", ").toString());
